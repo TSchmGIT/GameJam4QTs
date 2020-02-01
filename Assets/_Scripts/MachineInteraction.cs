@@ -16,13 +16,14 @@ public class MachineInteraction : MonoBehaviour
 
 	#region Private Variables
 
+
+
 	#endregion
 
 	#region Public Methods
 
 	public void InitiateMinigame(int playerID)
 	{
-		Debug.Log("InitiateMinigame");
 		GameManager.Instance.MinigameManager.StartMinigame(GetComponent<MinigameDisplayComponent>(), m_MinigameType, playerID);
 	}
 
