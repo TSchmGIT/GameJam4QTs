@@ -7,17 +7,19 @@ public class GameTickManager : MonoBehaviour
 	public float timeLeft => m_GameTimeLeft;
 	public float timePassed => GameManager.Instance.settings.GameTime - m_GameTimeLeft;
 
+	public int Points { get; private set; } = 0;
+
 	public bool isInCountdown => m_StartCountdownTimer > 0.0f;
 	public float countdownTime => m_StartCountdownTimer;
 
 	public event System.Action OnCountdownStarted = null;
 	public event System.Action OnGameStarted = null;
+	public event System.Action OnGameEnded = null;
 	#endregion
 
 	#region Private Variables
 	private float m_StartCountdownTimer = 0.0f;
 	private float m_GameTimeLeft = 0.0f;
-	private int m_Points = 0;
 
 	private List<GameObject> m_PlayerList = new List<GameObject>();
 	#endregion
@@ -25,6 +27,12 @@ public class GameTickManager : MonoBehaviour
 	#region Unity Callbacks
 	private void Awake()
 	{
+		if (GameManager.Instance.TickManager != this)
+		{
+			Destroy(gameObject);
+			return;
+		}
+
 		DontDestroyOnLoad(gameObject);
 	}
 
@@ -75,7 +83,7 @@ public class GameTickManager : MonoBehaviour
 
 	public void AddPoints(int points)
 	{
-		m_Points += points;
+		Points += points;
 	}
 
 	public void Init()
@@ -96,6 +104,8 @@ public class GameTickManager : MonoBehaviour
 		else
 		{
 			m_GameTimeLeft = 0.0f;
+
+			OnGameEnded?.Invoke();
 
 			GameManager.Instance.EndGame();
 			return true;

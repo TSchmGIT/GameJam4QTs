@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -30,7 +29,7 @@ public class GameManager : MonoBehaviour
 	#endregion
 
 	#region Private Methods
-    private MinigameManager m_MinigameManager   = new MinigameManager();
+	private MinigameManager m_MinigameManager   = new MinigameManager();
 	#endregion
 
 	#region Public Properties
@@ -40,8 +39,9 @@ public class GameManager : MonoBehaviour
 	public GameState State { get; private set; } = GameState.MainMenu;
 
 	public GameObject TutorialScreenGO { get; set; } = null;
+	public GameObject EndScreenGO { get; set; } = null;
 
-    public MinigameManager MinigameManager { get { return m_MinigameManager; } }
+	public MinigameManager MinigameManager { get { return m_MinigameManager; } }
 
 	//public event Action OnGameStarted = null;
 	#endregion
@@ -50,6 +50,12 @@ public class GameManager : MonoBehaviour
 
 	private void Awake()
 	{
+		if (Instance != null)
+		{
+			Destroy(gameObject);
+			return;
+		}
+
 		DontDestroyOnLoad(gameObject);
 		Instance = this;
 
@@ -80,8 +86,8 @@ public class GameManager : MonoBehaviour
 				break;
 			case GameState.Game:
 				//m_GameTickManager.Tick();
-                
-                MinigameManager.Tick();
+
+				MinigameManager.Tick();
 				break;
 			case GameState.PostGame:
 				break;
@@ -98,6 +104,11 @@ public class GameManager : MonoBehaviour
 		SceneManager.LoadScene((int)Scenes.Game);
 	}
 
+	public void LoadMainMenu()
+	{
+		SceneManager.LoadScene((int)Scenes.MainMenu);
+	}
+
 	public void StartGame()
 	{
 		State = GameState.Game;
@@ -108,11 +119,18 @@ public class GameManager : MonoBehaviour
 	public void EndGame()
 	{
 		State = GameState.PostGame;
+
+		ShowEndScreen(true);
 	}
 
 	public void ShowTutorialScreen(bool isShown)
 	{
 		TutorialScreenGO.SetActive(isShown);
+	}
+
+	public void ShowEndScreen(bool isShown)
+	{
+		EndScreenGO.SetActive(isShown);
 	}
 	#endregion
 
