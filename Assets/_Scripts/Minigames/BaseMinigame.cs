@@ -32,7 +32,7 @@ public abstract class BaseMinigame
 
 
     protected Rect              m_GamePlayRect;
-    Camera                      m_MinigameCamera;
+    protected Camera            m_MinigameCamera;
     RenderTexture               m_RenderTexture;
 
     public void Setup(int id, MinigameDisplayComponent displayComponent, Rect rect, int playerID, Action<MinigameTickResult> callback = null)
@@ -43,7 +43,7 @@ public abstract class BaseMinigame
         m_GamePlayRect                          = rect;
         FinishCallback                          = callback;
 
-        GameObject cameraObject                 = new GameObject("Minigame Camera");
+        GameObject cameraObject                 = new GameObject("Minigame " + m_MiniGameID);
         cameraObject.transform.localRotation    = Quaternion.Euler(90, 0, 0);
         m_MinigameCamera                        = cameraObject.AddComponent<Camera>();
         m_MinigameCamera.transform.position     = new Vector3(rect.center.x, 5.0f, rect.center.y);

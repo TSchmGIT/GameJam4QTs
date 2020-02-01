@@ -119,7 +119,7 @@ public class SequenceMinigame : BaseMinigame
 	void GenerateSequenceSprites()
 	{
 		m_SequenceMinigameObject = new GameObject("SequenceGame");
-		m_SequenceMinigameObject.transform.parent = null;
+		m_SequenceMinigameObject.transform.parent = m_MinigameCamera.transform;
 		m_SequenceMinigameObject.transform.position = new Vector3(100, 0, 0);
 		
 		const float RING_HEIGHT_FACTOR   = 0.2f;

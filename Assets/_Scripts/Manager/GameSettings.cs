@@ -17,4 +17,8 @@ public class GameSettings : ScriptableObject
     public Color BadColorGlow;
     public Color GoodColorBase;
     public Color GoodColorGlow;
+
+    [Header("Minigame: Screqdriver")]
+    public GameObject ScrewDriverTargetPrefab;
+    public GameObject ScrewDriverPinPrefab;
 }

@@ -48,7 +48,7 @@ public class Player1Controller : MonoBehaviour
         }
 
         // Interact with a Machine when in range and holding an item
-        if (m_MachineInRange != null && m_MachineInRange.canStartMinigame)
+        if (m_MachineInRange != null && m_MachineInRange.CanStartMinigame)
         {
             if (Input.GetKeyDown(m_InteractKey))
             {

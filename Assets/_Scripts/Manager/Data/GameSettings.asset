@@ -26,3 +26,7 @@ MonoBehaviour:
   BadColorGlow: {r: 0.061236143, g: 1, b: 0, a: 1}
   GoodColorBase: {r: 0.5188679, g: 0, b: 0, a: 1}
   GoodColorGlow: {r: 0, g: 0.5, b: 0.037570953, a: 1}
+  ScrewDriverTargetPrefab: {fileID: 9069196575019256207, guid: f71fbae7ae1b22c47b3331ee74660e79,
+    type: 3}
+  ScrewDriverPinPrefab: {fileID: 5636501814038634307, guid: 4e5bb46f812aa0d478d78fa4516fa037,
+    type: 3}
