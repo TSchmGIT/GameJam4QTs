@@ -11,6 +11,7 @@ public class GameTickManager : MonoBehaviour
 	public float countdownTime => m_StartCountdownTimer;
 
 	public event System.Action OnCountdownStarted = null;
+	public event System.Action OnGameStarted = null;
 	#endregion
 
 	#region Private Variables
@@ -65,6 +66,9 @@ public class GameTickManager : MonoBehaviour
 		else
 		{
 			m_StartCountdownTimer = 0.0f;
+
+			OnGameStarted?.Invoke();
+
 			return true;
 		}
 	}

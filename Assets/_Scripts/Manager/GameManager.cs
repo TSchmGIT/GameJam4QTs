@@ -31,11 +31,6 @@ public class GameManager : MonoBehaviour
 
 	#region Private Methods
     private MinigameManager m_MinigameManager   = new MinigameManager();
-<<<<<<< HEAD
-
-=======
-    private GameState m_State = GameState.Game;
->>>>>>> 3b29437013ede02ece4a82038ea29898a7468ee8
 	#endregion
 
 	#region Public Properties
@@ -117,7 +112,7 @@ public class GameManager : MonoBehaviour
 
 	public void ShowTutorialScreen(bool isShown)
 	{
-		TutorialScreenGO?.SetActive(isShown);
+		TutorialScreenGO.SetActive(isShown);
 	}
 	#endregion
 

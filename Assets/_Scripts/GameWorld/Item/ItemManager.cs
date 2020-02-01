@@ -91,7 +91,9 @@ public class ItemManager : MonoBehaviour
 		float itemSpawnInterval = m_ItemConfig.ItemSpawnIntervals.Evaluate(GameManager.Instance.TickManager.timePassed);
 		if (m_LastItemSpawnedTimestamp + itemSpawnInterval <= Time.time)
 		{
-			
+			m_LastItemSpawnedTimestamp = Time.time;
+
+			SpawnItem(ItemTier.Tier1);
 		}
 	}
 

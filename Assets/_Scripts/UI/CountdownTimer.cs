@@ -34,7 +34,7 @@ public class CountdownTimer : MonoBehaviour
 		float fontFactor = Mathf.PingPong((Time.time - m_CountdownResetTimestamp) * 2.0f, 1.0f);
 
 		m_Text.fontSize = (int)(m_MaximumFontSize * fontFactor);
-		m_Text.text = ((int)GameManager.Instance.TickManager.countdownTime).ToString();
+		m_Text.text = Mathf.Ceil(GameManager.Instance.TickManager.countdownTime).ToString();
 
 		if (!GameManager.Instance.TickManager.isInCountdown)
 		{
