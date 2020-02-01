@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TutorialScreenStartButton : MonoBehaviour
 {
@@ -10,6 +8,14 @@ public class TutorialScreenStartButton : MonoBehaviour
 	private void Awake()
 	{
 		GameManager.Instance.TutorialScreenGO = m_TutorialScreenGO;
+	}
+
+	private void OnDestroy()
+	{
+		if (GameManager.Instance.TutorialScreenGO == m_TutorialScreenGO)
+		{
+			GameManager.Instance.TutorialScreenGO = null;
+		}
 	}
 
 	public void StartGameAfterTutorial()

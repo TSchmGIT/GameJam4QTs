@@ -349,11 +349,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2399115246441076555, guid: 5056d0d4f687ff04790ac1e449368935,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1637666425}
     - target: {fileID: 2399115246489034234, guid: 5056d0d4f687ff04790ac1e449368935,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -569,15 +564,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1637666425 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7186245549102283271, guid: 1858168278c36084f8054a1e06767164,
-    type: 3}
-  m_PrefabInstance: {fileID: 496507504}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9019de3f516905146bbd36b1df92bc8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
