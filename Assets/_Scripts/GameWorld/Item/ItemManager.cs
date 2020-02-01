@@ -37,7 +37,7 @@ public class ItemManager : MonoBehaviour
 
 	private void Update()
 	{
-		if (GameManager.Instance.TickManager.isInCooldown)
+		if (GameManager.Instance.TickManager.isInCountdown)
 		{
 			return;
 		}

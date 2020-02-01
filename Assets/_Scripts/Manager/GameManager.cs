@@ -24,18 +24,23 @@ public class GameManager : MonoBehaviour
 	#region Unity References
 	[SerializeField]
 	private GameSettings m_Settings = null;
+
+	[SerializeField]
+	private GameTickManager m_GameTickManager   = new GameTickManager();
 	#endregion
 
 	#region Private Methods
-	private GameTickManager m_GameTickManager   = new GameTickManager();
     private MinigameManager m_MinigameManager   = new MinigameManager();
 
-	private GameState m_State = GameState.Game;
 	#endregion
 
 	#region Public Properties
 	public GameSettings settings => m_Settings;
 	public GameTickManager TickManager => m_GameTickManager;
+
+	public GameState State { get; private set; } = GameState.MainMenu;
+
+	public GameObject TutorialScreenGO { get; set; } = null;
 
 	//public event Action OnGameStarted = null;
 	#endregion
@@ -66,15 +71,14 @@ public class GameManager : MonoBehaviour
 
 	private void Update()
 	{
-		switch (m_State)
+		switch (State)
 		{
 			case GameState.MainMenu:
 				break;
 			case GameState.PreGame:
 				break;
 			case GameState.Game:
-				m_GameTickManager.Init();
-				m_GameTickManager.Tick();
+				//m_GameTickManager.Tick();
                 
                 m_MinigameManager.Tick();
 				break;
@@ -95,14 +99,19 @@ public class GameManager : MonoBehaviour
 
 	public void StartGame()
 	{
-		m_State = GameState.Game;
+		State = GameState.Game;
 
 		m_GameTickManager.ResetGame();
 	}
 
 	public void EndGame()
 	{
-		m_State = GameState.PostGame;
+		State = GameState.PostGame;
+	}
+
+	public void ShowTutorialScreen(bool isShown)
+	{
+		TutorialScreenGO?.SetActive(isShown);
 	}
 	#endregion
 
@@ -111,7 +120,9 @@ public class GameManager : MonoBehaviour
 
 	private void SetupNewGame(object showTutorialScreen)
 	{
-		m_State = m_Settings.ShowTutorialScreen ? GameState.PreGame : GameState.Game;
+		State = m_Settings.ShowTutorialScreen ? GameState.PreGame : GameState.Game;
+
+		ShowTutorialScreen(m_Settings.ShowTutorialScreen);
 	}
 	#endregion
 }

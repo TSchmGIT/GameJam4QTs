@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class GameTickManager
+public class GameTickManager : MonoBehaviour
 {
 	#region Properties
 	public float timeLeft => m_GameTimeLeft;
 	public float timePassed => GameManager.Instance.settings.GameTime - m_GameTimeLeft;
 
-	public bool isInCooldown => m_StartCountdownTimer > 0.0f;
+	public bool isInCountdown => m_StartCountdownTimer > 0.0f;
+	public float countdownTime => m_StartCountdownTimer;
+
+	public event System.Action OnCountdownStarted = null;
 	#endregion
 
 	#region Private Variables
@@ -18,18 +20,21 @@ public class GameTickManager
 
 	private List<GameObject> m_PlayerList = new List<GameObject>();
 	#endregion
-	
-	#region Public Methods
 
-	public void ResetGame()
+	#region Unity Callbacks
+	private void Awake()
 	{
-		m_GameTimeLeft = GameManager.Instance.settings.GameTime;
-		m_StartCountdownTimer = GameManager.Instance.settings.CountdownTime;
+		DontDestroyOnLoad(gameObject);
 	}
 
-	public void Tick()
+	public void Update()
 	{
-		if (isInCooldown)
+		if (GameManager.Instance.State != GameManager.GameState.Game)
+		{
+			return;
+		}
+
+		if (isInCountdown)
 		{
 			bool cooldownHasPassed = UpdateCooldown();
 		}
@@ -37,6 +42,17 @@ public class GameTickManager
 		{
 			bool gameHasEnded = UpdateTime();
 		}
+	}
+	#endregion
+
+	#region Public Methods
+
+	public void ResetGame()
+	{
+		m_GameTimeLeft = GameManager.Instance.settings.GameTime;
+		m_StartCountdownTimer = GameManager.Instance.settings.CountdownTime;
+
+		OnCountdownStarted?.Invoke();
 	}
 
 	private bool UpdateCooldown()
@@ -60,7 +76,7 @@ public class GameTickManager
 
 	public void Init()
 	{
-		
+
 	}
 	#endregion
 
@@ -77,7 +93,7 @@ public class GameTickManager
 		{
 			m_GameTimeLeft = 0.0f;
 
-			//GameManager.Instance.EndGame();
+			GameManager.Instance.EndGame();
 			return true;
 		}
 	}
