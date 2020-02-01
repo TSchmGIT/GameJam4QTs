@@ -39,7 +39,7 @@ public class SequenceMinigame : BaseMinigame
 
     public override void Finish()
     {
-        GameObject.Destroy(m_SequenceMinigameObject);
+		Object.Destroy(m_SequenceMinigameObject);
 
         ////////////////////////////////////////////////////////////////
 
@@ -53,7 +53,7 @@ public class SequenceMinigame : BaseMinigame
         const int MIN_LENGTH = 5;
         const int MAX_LENGTH = 7;
 
-        int length = Mathf.RoundToInt(Random.value * (MAX_LENGTH - MIN_LENGTH) + MIN_LENGTH);
+        int length = Random.Range(MIN_LENGTH, MAX_LENGTH + 1);
         
         m_OriginalSequence  = new List<InputHelper.Keys>();
         m_InSequenceID      = 0;
@@ -62,7 +62,7 @@ public class SequenceMinigame : BaseMinigame
         {
             InputHelper.Keys key = InputHelper.Keys.Up;
 
-            int keyDirection = Mathf.RoundToInt(Random.value * 3);
+            int keyDirection = Random.Range(0, 4);
             switch (keyDirection)
             {
                 case 0: key = InputHelper.Keys.Up;      break;
@@ -134,8 +134,7 @@ public class SequenceMinigame : BaseMinigame
         {
             Texture2D texture = GameManager.Instance.settings.RuneTextures[(int) m_OriginalSequence[i]];
 
-            GameObject spriteObject         = GameObject.Instantiate(GameManager.Instance.settings.RuneSpritePrefab);
-            spriteObject.transform.parent   = m_SequenceMinigameObject.transform;
+            GameObject spriteObject         = Object.Instantiate(GameManager.Instance.settings.RuneSpritePrefab, m_SequenceMinigameObject.transform);
             spriteObject.transform.position = new Vector3(OFFSET_X + PADDING_X + (WIDTH -  2 * PADDING_X) / (float) m_OriginalSequence.Count * i, 0, 
                                                          OFFSET_Y + PADDING_Y + (-Mathf.Cos((i / (float) m_OriginalSequence.Count) * Mathf.PI * 2.0f) * 0.5f + 0.5f) * RING_HEIGHT);
 

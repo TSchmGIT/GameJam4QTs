@@ -8,7 +8,7 @@ public class Player1Controller : MonoBehaviour
 
     public CharacterController m_CharacterController;
     public float m_MovementSpeed = 5.0f;
-    public bool m_InMachineRange = false;
+    public MachineInteraction m_MachineInRange = null;
     public Item m_ItemToPick = null;
     public Item m_HeldItem = null;
     public string m_VerticalAxisName = null;
@@ -46,13 +46,14 @@ public class Player1Controller : MonoBehaviour
         }
 
         // Interact with a Machine when in range and holding an item
-        if (m_InMachineRange == true)
+        if (m_MachineInRange != null)
         {
             if (Input.GetKeyDown(m_InteractKey))
             {
                 if (m_HeldItem != null)
                 {
                     Debug.Log("Execute Machine Interaction");
+					m_MachineInRange.InitiateMinigame();
                 }
             }
         }
@@ -62,7 +63,7 @@ public class Player1Controller : MonoBehaviour
         {
             if (Input.GetKeyDown(m_InteractKey))
             {
-                if (m_InMachineRange == false)
+                if (m_MachineInRange == null)
                 {
                     Debug.Log("Drop Item");
                     Rigidbody ItemRb = m_HeldItem.gameObject.GetComponent<Rigidbody>();
@@ -98,15 +99,15 @@ public class Player1Controller : MonoBehaviour
         MachineInteraction Machine = other.GetComponent<MachineInteraction>();
         Item Item = other.GetComponent<Item>();
 
-        if (Machine != null)
+        if (m_MachineInRange == null && Machine != null)
         {
-            m_InMachineRange = true;
-        }
+            m_MachineInRange = Machine;
+			Debug.Log("Machine in range");
+		}
 
-        if (Item != null)
+		if (Item != null)
         {
             m_ItemToPick = Item;
-
         }
     }
 
@@ -116,12 +117,13 @@ public class Player1Controller : MonoBehaviour
         MachineInteraction Machine = other.GetComponent<MachineInteraction>();
         Item Item = other.GetComponent<Item>();
 
-        if (Machine != null)
+        if (Machine == m_MachineInRange)
         {
-            m_InMachineRange = false;
-        }
+            m_MachineInRange = null;
+			Debug.Log("Machine out of range");
+		}
 
-        if (Item != null)
+		if (Item != null)
         {
             m_ItemToPick = null;
         }
