@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MinAmountMachines: 2
   MaxAmountMachines: 2
+  Prefab: {fileID: 2030432570844375930, guid: 7f2a7d9e47db6e841ad00e7b57c2c794, type: 3}

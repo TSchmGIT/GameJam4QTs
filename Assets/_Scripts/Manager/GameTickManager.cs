@@ -5,11 +5,14 @@ using UnityEngine;
 public class GameTickManager
 {
 	#region Properties
-	private bool isInCooldown => m_StartCountdownTimer > 0.0f;
+	public float timeLeft => m_GameTimeLeft;
+	public float timePassed => GameManager.Instance.settings.GameTime - m_GameTimeLeft;
+
+	public bool isInCooldown => m_StartCountdownTimer > 0.0f;
 	#endregion
 
 	#region Private Variables
-	public float m_StartCountdownTimer = 0.0f;
+	private float m_StartCountdownTimer = 0.0f;
 	private float m_GameTimeLeft = 0.0f;
 	private int m_Points = 0;
 

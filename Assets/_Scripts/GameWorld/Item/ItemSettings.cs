@@ -7,4 +7,6 @@ public class ItemSettings : ScriptableObject
 {
 	public int MinAmountMachines;
 	public int MaxAmountMachines;
+
+	public GameObject Prefab;
 }

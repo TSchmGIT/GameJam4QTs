@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
 
 	#region Public Properties
 	public GameSettings settings => m_Settings;
+	public GameTickManager TickManager => m_GameTickManager;
 
 	//public event Action OnGameStarted = null;
 	#endregion
