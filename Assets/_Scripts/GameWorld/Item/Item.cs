@@ -62,10 +62,10 @@ public class Item : MonoBehaviour
 
 	private void UpdateConveyorBelt()
 	{
-		foreach (ConveyorBelt conveyorBelt in m_ConveyorBeltList)
+		/*foreach (ConveyorBelt conveyorBelt in m_ConveyorBeltList)
 		{
 			transform.position += conveyorBelt.transform.forward * conveyorBelt.speed * Time.deltaTime;
-		}
+		}*/
 	}
 
 	#endregion
