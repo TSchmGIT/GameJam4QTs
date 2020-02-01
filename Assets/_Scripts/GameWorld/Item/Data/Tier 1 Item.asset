@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3f3fec3a23396b41aa7c7eca7c81c15, type: 3}
-  m_Name: Tier 1 Item 1
+  m_Name: Tier 1 Item
   m_EditorClassIdentifier: 
   MinAmountMachines: 1
   MaxAmountMachines: 1
+  Prefab: {fileID: 2030432570844375930, guid: 7f2a7d9e47db6e841ad00e7b57c2c794, type: 3}

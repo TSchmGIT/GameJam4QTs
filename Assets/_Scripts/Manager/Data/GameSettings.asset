@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4fcc03d3d9931b418337c0ea203ee97, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  GameTime: 1500
+  GameTime: 10
   CountdownTime: 3
   ShowTutorialScreen: 1
   RuneTextures:

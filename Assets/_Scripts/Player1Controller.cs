@@ -11,6 +11,9 @@ public class Player1Controller : MonoBehaviour
     public bool m_InMachineRange = false;
     public Item m_ItemToPick = null;
     public Item m_HeldItem = null;
+    public string m_VerticalAxisName = null;
+    public string m_HorizontalAxisName = null;
+    public KeyCode m_InteractKey = KeyCode.Space;
 
     #endregion
 
@@ -25,10 +28,10 @@ public class Player1Controller : MonoBehaviour
     {
 
         //Horizontal and Vertical movement of the player character
-        float hor = Input.GetAxis("HorizontalPlayer1");
+        float hor = Input.GetAxis(m_HorizontalAxisName);
         Vector3 horVector = Vector3.right * hor;
 
-        float ver = Input.GetAxis("VerticalPlayer1");
+        float ver = Input.GetAxis(m_VerticalAxisName);
         Vector3 verVector = Vector3.forward * ver;
 
         Vector3 delta = horVector + verVector;
@@ -45,7 +48,7 @@ public class Player1Controller : MonoBehaviour
         // Interact with a Machine when in range and holding an item
         if (m_InMachineRange == true)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(m_InteractKey))
             {
                 if (m_HeldItem != null)
                 {
@@ -57,11 +60,13 @@ public class Player1Controller : MonoBehaviour
         // Drop an item when holding one and not in range of a machine
         if (m_HeldItem != null)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(m_InteractKey))
             {
                 if (m_InMachineRange == false)
                 {
                     Debug.Log("Drop Item");
+                    Rigidbody ItemRb = m_HeldItem.gameObject.GetComponent<Rigidbody>();
+                    ItemRb.isKinematic = false;
                     m_HeldItem.transform.parent = this.transform.parent;
                     m_HeldItem = null;
                     return;
@@ -74,11 +79,12 @@ public class Player1Controller : MonoBehaviour
         {
             if (m_HeldItem == null)
             {
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetKeyDown(m_InteractKey))
                 {
                     Debug.Log("Pick Up Item");
-                    //m_IsHoldingItem = true;
                     m_HeldItem = m_ItemToPick;
+                    Rigidbody ItemRb = m_HeldItem.gameObject.GetComponent<Rigidbody>();
+                    ItemRb.isKinematic = true;
                     m_HeldItem.transform.parent = this.transform;
                     m_HeldItem.transform.localPosition = new Vector3(0f, -0.6f, 1.2f);
                 }
@@ -99,8 +105,8 @@ public class Player1Controller : MonoBehaviour
 
         if (Item != null)
         {
-            //m_InItemRange = true;
             m_ItemToPick = Item;
+
         }
     }
 
@@ -117,7 +123,6 @@ public class Player1Controller : MonoBehaviour
 
         if (Item != null)
         {
-            //m_InItemRange = false;
             m_ItemToPick = null;
         }
         

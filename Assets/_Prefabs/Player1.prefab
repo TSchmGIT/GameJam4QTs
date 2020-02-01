@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 2663474155217487831}
   - component: {fileID: 2663474155217487830}
   - component: {fileID: 2663474155217487829}
+  - component: {fileID: 9127758031251245929}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -175,7 +176,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -193,3 +194,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CharacterController: {fileID: 2663474155217487830}
   m_MovementSpeed: 5
+  m_InMachineRange: 0
+  m_ItemToPick: {fileID: 0}
+  m_HeldItem: {fileID: 0}
+  m_VerticalAxisName: VerticalPlayer1
+  m_HorizontalAxisName: HorizontalPlayer1
+  m_InteractKey: 32
+--- !u!135 &9127758031251245929
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2663474155217487828}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.5
+  m_Center: {x: 0, y: 0, z: 0}

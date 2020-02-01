@@ -1,32 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class GameTickManager
+public class GameTickManager : MonoBehaviour
 {
 	#region Properties
-	private bool isInCooldown => m_StartCountdownTimer > 0.0f;
+	public float timeLeft => m_GameTimeLeft;
+	public float timePassed => GameManager.Instance.settings.GameTime - m_GameTimeLeft;
+
+	public int Points { get; private set; } = 0;
+
+	public bool isInCountdown => m_StartCountdownTimer > 0.0f;
+	public float countdownTime => m_StartCountdownTimer;
+
+	public event System.Action OnCountdownStarted = null;
+	public event System.Action OnGameStarted = null;
+	public event System.Action OnGameEnded = null;
 	#endregion
 
 	#region Private Variables
-	public float m_StartCountdownTimer = 0.0f;
+	private float m_StartCountdownTimer = 0.0f;
 	private float m_GameTimeLeft = 0.0f;
-	private int m_Points = 0;
 
 	private List<GameObject> m_PlayerList = new List<GameObject>();
 	#endregion
-	
-	#region Public Methods
 
-	public void ResetGame()
+	#region Unity Callbacks
+	private void Awake()
 	{
-		m_GameTimeLeft = GameManager.Instance.settings.GameTime;
-		m_StartCountdownTimer = GameManager.Instance.settings.CountdownTime;
+		if (GameManager.Instance.TickManager != this)
+		{
+			Destroy(gameObject);
+			return;
+		}
+
+		DontDestroyOnLoad(gameObject);
 	}
 
-	public void Tick()
+	public void Update()
 	{
-		if (isInCooldown)
+		if (GameManager.Instance.State != GameManager.GameState.Game)
+		{
+			return;
+		}
+
+		if (isInCountdown)
 		{
 			bool cooldownHasPassed = UpdateCooldown();
 		}
@@ -35,29 +52,43 @@ public class GameTickManager
 			bool gameHasEnded = UpdateTime();
 		}
 	}
+	#endregion
+
+	#region Public Methods
+
+	public void ResetGame()
+	{
+		m_GameTimeLeft = GameManager.Instance.settings.GameTime;
+		m_StartCountdownTimer = GameManager.Instance.settings.CountdownTime;
+
+		OnCountdownStarted?.Invoke();
+	}
 
 	private bool UpdateCooldown()
 	{
-		if (m_StartCountdownTimer >= 0.0f)
+		m_StartCountdownTimer -= Time.deltaTime;
+		m_StartCountdownTimer = Mathf.Max(m_StartCountdownTimer, 0.0f);
+
+		if (m_StartCountdownTimer == 0.0f)
 		{
-			m_StartCountdownTimer -= Time.deltaTime;
-			return false;
+			OnGameStarted?.Invoke();
+
+			return true;
 		}
 		else
 		{
-			m_StartCountdownTimer = 0.0f;
-			return true;
+			return false;
 		}
 	}
 
 	public void AddPoints(int points)
 	{
-		m_Points += points;
+		Points += points;
 	}
 
 	public void Init()
 	{
-		
+
 	}
 	#endregion
 
@@ -74,7 +105,9 @@ public class GameTickManager
 		{
 			m_GameTimeLeft = 0.0f;
 
-			//GameManager.Instance.EndGame();
+			OnGameEnded?.Invoke();
+
+			GameManager.Instance.EndGame();
 			return true;
 		}
 	}

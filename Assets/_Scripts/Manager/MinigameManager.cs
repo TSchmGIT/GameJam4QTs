@@ -40,6 +40,15 @@ public class MinigameManager
 
             StartMinigame(sequenceMinigame);
         }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            ScrewdriverMinigame screwdriverMinimap = new ScrewdriverMinigame();
+            screwdriverMinimap.Setup(null, 0);
+
+            StartMinigame(screwdriverMinimap);
+        }
+
     }
 
     ////////////////////////////////////////////////////////////////

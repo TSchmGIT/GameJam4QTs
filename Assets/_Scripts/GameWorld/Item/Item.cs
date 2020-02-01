@@ -3,7 +3,7 @@ using UnityEngine;
 
 public struct ItemRuntimeData
 {
-
+	public List<int> MachineOrderList;
 }
 
 [RequireComponent(typeof(Rigidbody))]
@@ -13,7 +13,7 @@ public class Item : MonoBehaviour
 	private List<ConveyorBelt> m_ConveyorBeltList = new List<ConveyorBelt>();
 	private Rigidbody m_Rigidbody = null;
 
-	//private ItemData m_ItemData;
+	private ItemRuntimeData m_RuntimeData;
 	#endregion
 
 	#region Unity Callback
@@ -31,27 +31,23 @@ public class Item : MonoBehaviour
 	private void OnCollisionEnter(Collision collision)
 	{
 		ConveyorBelt conveyorBelt = collision.gameObject.GetComponent<ConveyorBelt>();
-
-		m_ConveyorBeltList.Add(conveyorBelt);
+		if (conveyorBelt != null)
+		{
+			m_ConveyorBeltList.Add(conveyorBelt);
+		}
 	}
 
 	private void OnCollisionExit(Collision collision)
 	{
 		ConveyorBelt conveyorBelt = collision.gameObject.GetComponent<ConveyorBelt>();
 
-		m_ConveyorBeltList.Remove(conveyorBelt);
+		if (conveyorBelt != null)
+		{
+			m_ConveyorBeltList.Remove(conveyorBelt);
+		}
 	}
 
 	private void OnGUI()
-	{
-
-	}
-
-	#endregion
-
-	#region Public Methods
-	
-	public void SpawnItem()
 	{
 
 	}
@@ -62,10 +58,15 @@ public class Item : MonoBehaviour
 
 	private void UpdateConveyorBelt()
 	{
-		/*foreach (ConveyorBelt conveyorBelt in m_ConveyorBeltList)
+		foreach (ConveyorBelt conveyorBelt in m_ConveyorBeltList)
 		{
 			transform.position += conveyorBelt.transform.forward * conveyorBelt.speed * Time.deltaTime;
-		}*/
+		}
+	}
+
+	public void SetRuntimeData(ItemRuntimeData runtimeData)
+	{
+		m_RuntimeData = runtimeData;
 	}
 
 	#endregion
