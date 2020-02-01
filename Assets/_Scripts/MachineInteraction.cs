@@ -24,8 +24,14 @@ public class MachineInteraction : MonoBehaviour
 
 	public void InitiateMinigame(int playerID)
 	{
-		GameManager.Instance.MinigameManager.StartMinigame(GetComponent<MinigameDisplayComponent>(), m_MinigameType, playerID);
+		Debug.Log("InitiateMinigame");
+		GameManager.Instance.MinigameManager.StartMinigame(GetComponent<MinigameDisplayComponent>(), m_MinigameType, playerID, OnMachineInteractionFinished);
 	}
+
+    void OnMachineInteractionFinished(MinigameTickResult tickResult)
+    {
+        Debug.Log("I am a machine, my name is " + gameObject.name + " and I finished a minigame with result " + tickResult.ToString());
+    }
 
 	#endregion
 }

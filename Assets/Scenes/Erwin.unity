@@ -469,9 +469,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MinTargetSize: 0.5
-  m_MaxTargetSize: 2
-  m_MinPinSpeed: 6
-  m_MaxPinSpeed: 9
+  m_MaxTargetSize: 1.5
+  m_MinPinSpeed: 8
+  m_MaxPinSpeed: 12
   m_Pin: {fileID: 847187171}
   m_Target: {fileID: 1310691073}
   m_ResultText: {fileID: 1411089842}

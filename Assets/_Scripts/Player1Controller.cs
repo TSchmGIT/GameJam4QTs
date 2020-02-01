@@ -15,6 +15,7 @@ public class Player1Controller : MonoBehaviour
     public string m_VerticalAxisName = null;
     public string m_HorizontalAxisName = null;
     public KeyCode m_InteractKey = KeyCode.Space;
+    public Transform m_HoldCube = null;
 
     #endregion
 
@@ -88,7 +89,7 @@ public class Player1Controller : MonoBehaviour
                     Rigidbody ItemRb = m_HeldItem.gameObject.GetComponent<Rigidbody>();
                     ItemRb.isKinematic = true;
                     m_HeldItem.transform.parent = this.transform;
-                    m_HeldItem.transform.localPosition = new Vector3(0f, -0.6f, 1.2f);
+                    m_HeldItem.transform.position = m_HoldCube.position;
                 }
             }
         }
