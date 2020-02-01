@@ -58,18 +58,18 @@ public class GameTickManager : MonoBehaviour
 
 	private bool UpdateCooldown()
 	{
-		if (m_StartCountdownTimer >= 0.0f)
-		{
-			m_StartCountdownTimer -= Time.deltaTime;
-			return false;
-		}
-		else
-		{
-			m_StartCountdownTimer = 0.0f;
+		m_StartCountdownTimer -= Time.deltaTime;
+		m_StartCountdownTimer = Mathf.Max(m_StartCountdownTimer, 0.0f);
 
+		if (m_StartCountdownTimer == 0.0f)
+		{
 			OnGameStarted?.Invoke();
 
 			return true;
+		}
+		else
+		{
+			return false;
 		}
 	}
 

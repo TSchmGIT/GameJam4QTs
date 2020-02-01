@@ -35,6 +35,18 @@ public class ItemManager : MonoBehaviour
 		m_ItemTierSettings.Add(ItemTier.Tier4, m_ItemTier4);
 	}
 
+	private void Start()
+	{
+		GameManager.Instance.TickManager.OnGameStarted += TickManager_OnGameStarted;
+
+		m_LastItemSpawnedTimestamp = float.MaxValue * 0.5f;
+	}
+
+	private void OnDestroy()
+	{
+		GameManager.Instance.TickManager.OnGameStarted -= TickManager_OnGameStarted;
+	}
+
 	private void Update()
 	{
 		if (GameManager.Instance.TickManager.isInCountdown)
@@ -95,6 +107,11 @@ public class ItemManager : MonoBehaviour
 
 			SpawnItem(ItemTier.Tier1);
 		}
+	}
+
+	private void TickManager_OnGameStarted()
+	{
+		m_LastItemSpawnedTimestamp = Time.time;
 	}
 
 	#endregion

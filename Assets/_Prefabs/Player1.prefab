@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 2663474155217487831}
   - component: {fileID: 2663474155217487830}
   - component: {fileID: 2663474155217487829}
+  - component: {fileID: 9127758031251245929}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -193,3 +194,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CharacterController: {fileID: 2663474155217487830}
   m_MovementSpeed: 5
+  m_InMachineRange: 0
+  m_ItemToPick: {fileID: 0}
+  m_HeldItem: {fileID: 0}
+--- !u!135 &9127758031251245929
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2663474155217487828}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.15
+  m_Center: {x: 0, y: 0, z: 0}
