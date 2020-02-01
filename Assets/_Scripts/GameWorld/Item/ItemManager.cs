@@ -54,6 +54,11 @@ public class ItemManager : MonoBehaviour
 			return;
 		}
 
+		if (GameManager.Instance.State != GameManager.GameState.Game)
+		{
+			return;
+		}
+
 		UpdateItemSpawning();
 	}
 
