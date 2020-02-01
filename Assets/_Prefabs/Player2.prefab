@@ -91,8 +91,8 @@ GameObject:
   - component: {fileID: 574284878429357241}
   - component: {fileID: 574284878429357240}
   - component: {fileID: 574284878429357243}
-  - component: {fileID: 574284878429357242}
   - component: {fileID: 580436227770119621}
+  - component: {fileID: 2748837822596983279}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -176,27 +176,10 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &574284878429357242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 574284878429357245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff26ffb6cd126fa4eaa9a6969139f641, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_CharacterController: {fileID: 574284878429357243}
-  m_MovementSpeed: 5
-  m_InMachineRange: 0
-  m_ItemToPick: {fileID: 0}
-  m_HeldItem: {fileID: 0}
 --- !u!135 &580436227770119621
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -208,5 +191,25 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.15
+  m_Radius: 2.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2748837822596983279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574284878429357245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a10057b69916da48910a5efb573dc89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CharacterController: {fileID: 574284878429357243}
+  m_MovementSpeed: 5
+  m_InMachineRange: 0
+  m_ItemToPick: {fileID: 0}
+  m_HeldItem: {fileID: 0}
+  m_VerticalAxisName: VerticalPlayer2
+  m_HorizontalAxisName: HorizontalPlayer2
+  m_InteractKey: 13
