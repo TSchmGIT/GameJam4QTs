@@ -77,7 +77,7 @@ public class GameTickManager
 		{
 			m_GameTimeLeft = 0.0f;
 
-			GameManager.Instance.EndGame();
+			//GameManager.Instance.EndGame();
 			return true;
 		}
 	}
