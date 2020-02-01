@@ -117,15 +117,9 @@ public class SequenceMinigame : BaseMinigame
         m_SequenceMinigameObject.transform.parent = null;
         m_SequenceMinigameObject.transform.position = new Vector3(100, 0, 0);
         
-        const float OFFSET_X        = 10.0f;
-        const float OFFSET_Y        = 10.0f;
-
-        const float WIDTH         = 10;
-        const float HEIGHT        = 5;
-
-        const float RING_HEIGHT   = 0.5f;
-        const float PADDING_X     = 0.5f;
-        const float PADDING_Y     = 0.5f;
+        const float RING_HEIGHT_FACTOR   = 0.2f;
+        const float PADDING_X_FACTOR     = 0.1f;
+        const float PADDING_Y_FACTOR     = 0.3f;
 
         m_Renderers = new List<MeshRenderer>();
 
@@ -136,8 +130,8 @@ public class SequenceMinigame : BaseMinigame
 
             GameObject spriteObject         = GameObject.Instantiate(GameManager.Instance.settings.RuneSpritePrefab);
             spriteObject.transform.parent   = m_SequenceMinigameObject.transform;
-            spriteObject.transform.position = new Vector3(OFFSET_X + PADDING_X + (WIDTH -  2 * PADDING_X) / (float) m_OriginalSequence.Count * i, 0, 
-                                                         OFFSET_Y + PADDING_Y + (-Mathf.Cos((i / (float) m_OriginalSequence.Count) * Mathf.PI * 2.0f) * 0.5f + 0.5f) * RING_HEIGHT);
+            spriteObject.transform.position = new Vector3(m_GamePlayRect.xMin + m_GamePlayRect.width * PADDING_X_FACTOR + (m_GamePlayRect.width - m_GamePlayRect.width * 2 * PADDING_X_FACTOR) / (float) m_OriginalSequence.Count * i, 0, 
+                                                          m_GamePlayRect.yMin + m_GamePlayRect.height * PADDING_Y_FACTOR + (-Mathf.Cos((i / (float) m_OriginalSequence.Count) * Mathf.PI * 2.0f) * 0.5f + 0.5f) * m_GamePlayRect.height * RING_HEIGHT_FACTOR);
 
             MeshRenderer renderer           = spriteObject.GetComponent<MeshRenderer>();
             

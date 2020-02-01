@@ -6,7 +6,30 @@ public class MinigameManager
 {
     private List<BaseMinigame> m_CurrentMinigames;
     
-    public void StartMinigame(BaseMinigame minigame)
+    public void StartMinigame(MinigameDisplayComponent display, MinigameType type, int playerID)
+    {
+        switch (type)
+        {
+            case MinigameType.Sequence:
+            
+                SequenceMinigame sequenceMinigame = new SequenceMinigame();
+                sequenceMinigame.Setup(null, new Rect(100, 100, 10, 10), 0);
+
+                BeginMinigame(sequenceMinigame);
+            
+            break;
+            case MinigameType.Scredriver:
+            
+                ScrewdriverMinigame screwdriverMinimap = new ScrewdriverMinigame();
+                screwdriverMinimap.Setup(null, new Rect(200, 100, 10, 10), 0);
+
+                BeginMinigame(screwdriverMinimap);
+
+            break;
+        }
+    }
+
+    void BeginMinigame(BaseMinigame minigame)
     {
         minigame.Start();
         m_CurrentMinigames.Add(minigame);
@@ -35,18 +58,12 @@ public class MinigameManager
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            SequenceMinigame sequenceMinigame = new SequenceMinigame();
-            sequenceMinigame.Setup(null, 0);
-
-            StartMinigame(sequenceMinigame);
+            StartMinigame(null, MinigameType.Sequence, 0);
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            ScrewdriverMinigame screwdriverMinimap = new ScrewdriverMinigame();
-            screwdriverMinimap.Setup(null, 0);
-
-            StartMinigame(screwdriverMinimap);
+            StartMinigame(null, MinigameType.Scredriver, 0);
         }
 
     }
