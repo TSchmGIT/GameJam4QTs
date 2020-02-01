@@ -8,8 +8,11 @@ public class SequenceMinigame : BaseMinigame
 
     ////////////////////////////////////////////////////////////////
     
-    private List<KeyCode> m_OriginalSequence;
-    private List<KeyCode> m_RemainingSequence;
+    private List<InputHelper.Keys>  m_OriginalSequence;
+    private int                     m_InSequenceID;
+    private List<MeshRenderer>      m_Renderers;
+
+    private GameObject m_SequenceMinigameObject;
 
     ////////////////////////////////////////////////////////////////
 
@@ -26,7 +29,8 @@ public class SequenceMinigame : BaseMinigame
     public override MinigameTickResult Tick()
     {
         MinigameTickResult result = AcceptInput();
-        DisplaySequence();
+        TickRunes();
+        //DisplaySequence();
 
         return result;
     }
@@ -35,7 +39,10 @@ public class SequenceMinigame : BaseMinigame
 
     public override void Finish()
     {
-        // TODO
+        GameObject.Destroy(m_SequenceMinigameObject);
+
+        ////////////////////////////////////////////////////////////////
+
         Debug.Log("Finished Minigame Sequence");
     }
 
@@ -43,29 +50,28 @@ public class SequenceMinigame : BaseMinigame
 
     void GenerateSequence()
     {
-        const int MIN_LENGTH = 3;
-        const int MAX_LENGTH = 5;
+        const int MIN_LENGTH = 5;
+        const int MAX_LENGTH = 7;
 
         int length = Mathf.RoundToInt(Random.value * (MAX_LENGTH - MIN_LENGTH) + MIN_LENGTH);
         
-        m_OriginalSequence = new List<KeyCode>();
-        m_RemainingSequence = new List<KeyCode>();
+        m_OriginalSequence  = new List<InputHelper.Keys>();
+        m_InSequenceID      = 0;
 
         for (int i = 0; i < length; i++)
         {
-            KeyCode keyCode = KeyCode.Alpha0;
+            InputHelper.Keys key = InputHelper.Keys.Up;
 
             int keyDirection = Mathf.RoundToInt(Random.value * 3);
             switch (keyDirection)
             {
-                case 0: keyCode = GetKeyCode(InputHelper.Keys.Up);      break;
-                case 1: keyCode = GetKeyCode(InputHelper.Keys.Right);   break;
-                case 2: keyCode = GetKeyCode(InputHelper.Keys.Down);    break;
-                case 3: keyCode = GetKeyCode(InputHelper.Keys.Left);    break;
+                case 0: key = InputHelper.Keys.Up;      break;
+                case 1: key = InputHelper.Keys.Right;   break;
+                case 2: key = InputHelper.Keys.Down;    break;
+                case 3: key = InputHelper.Keys.Left;    break;
             }
 
-            m_OriginalSequence.Add(keyCode);
-            m_RemainingSequence.Add(keyCode);
+            m_OriginalSequence.Add(key);
         }
     }
 
@@ -73,12 +79,12 @@ public class SequenceMinigame : BaseMinigame
     
     MinigameTickResult AcceptInput()
     {
-        if (m_RemainingSequence.Count == 0)
+        if (m_InSequenceID >= m_OriginalSequence.Count)
         {
             return MinigameTickResult.Failed;
         }
 
-        KeyCode keyCode = m_RemainingSequence[0];
+        KeyCode keyCode = GetKeyCode(m_OriginalSequence[m_InSequenceID]);
 
         bool anyKeyDown = AnyArrowKeyDown();
         if (!anyKeyDown)
@@ -88,9 +94,9 @@ public class SequenceMinigame : BaseMinigame
 
         if (Input.GetKeyDown(keyCode))
         {
-            m_RemainingSequence.RemoveAt(0);
+            m_InSequenceID ++;
             
-            if (m_RemainingSequence.Count == 0)
+            if (m_InSequenceID == m_OriginalSequence.Count)
             {
                 Debug.Log("You Win");
                 return MinigameTickResult.EarlySuccess;
@@ -107,17 +113,53 @@ public class SequenceMinigame : BaseMinigame
     
     void GenerateSequenceSprites()
     {
+        m_SequenceMinigameObject = new GameObject("SequenceGame");
+        m_SequenceMinigameObject.transform.parent = null;
+        m_SequenceMinigameObject.transform.position = new Vector3(100, 0, 0);
+        
+        const float OFFSET_X        = 10.0f;
+        const float OFFSET_Y        = 10.0f;
+
+        const float WIDTH         = 10;
+        const float HEIGHT        = 5;
+
+        const float RING_HEIGHT   = 0.5f;
+        const float PADDING_X     = 0.5f;
+        const float PADDING_Y     = 0.5f;
+
+        m_Renderers = new List<MeshRenderer>();
+
         // TODO
-        for (int i = 0; i < m_RemainingSequence.Count; i++)
+        for (int i = 0; i < m_OriginalSequence.Count; i++)
         {
-            Debug.Log("Key " + m_OriginalSequence[i].ToString());
+            Texture2D texture = GameManager.Instance.settings.RuneTextures[(int) m_OriginalSequence[i]];
+
+            GameObject spriteObject         = GameObject.Instantiate(GameManager.Instance.settings.RuneSpritePrefab);
+            spriteObject.transform.parent   = m_SequenceMinigameObject.transform;
+            spriteObject.transform.position = new Vector3(OFFSET_X + PADDING_X + (WIDTH -  2 * PADDING_X) / (float) m_OriginalSequence.Count * i, 0, 
+                                                         OFFSET_Y + PADDING_Y + (-Mathf.Cos((i / (float) m_OriginalSequence.Count) * Mathf.PI * 2.0f) * 0.5f + 0.5f) * RING_HEIGHT);
+
+            MeshRenderer renderer           = spriteObject.GetComponent<MeshRenderer>();
+            
+            renderer.material.SetTexture("_MainTex", texture);
+
+            m_Renderers.Add(renderer);
         }
     }
 
     ////////////////////////////////////////////////////////////////
     
-    void DisplaySequence()
-    {   
-        // TODO
+    void TickRunes()
+    {
+        GameSettings settings = GameManager.Instance.settings;
+        for (int i = 0; i < m_Renderers.Count; i++)
+        {
+            float glowAmount    = Mathf.Cos(Time.time + m_Renderers[i].transform.localPosition.x) * 0.5f + 0.5f;
+            bool isDone         = i < m_InSequenceID;
+
+            m_Renderers[i].material.SetColor("_Color", isDone ? settings.GoodColorBase : settings.BadColorBase);
+            m_Renderers[i].material.SetColor("_GlowColor", isDone ? settings.GoodColorGlow : settings.BadColorGlow);
+            m_Renderers[i].material.SetFloat("_GlowAmount", glowAmount);
+        }
     }
 }

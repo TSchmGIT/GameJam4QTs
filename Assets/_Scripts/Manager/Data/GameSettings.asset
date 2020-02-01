@@ -12,6 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4fcc03d3d9931b418337c0ea203ee97, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  GameTime: 10
+  GameTime: 150
   CountdownTime: 3
   ShowTutorialScreen: 1
+  RuneTextures:
+  - {fileID: 2800000, guid: 0b6b2416412e0f54e9dd593c0d35d958, type: 3}
+  - {fileID: 2800000, guid: 83ac1361960099c4890ed8b75ec9555f, type: 3}
+  - {fileID: 2800000, guid: f749b91efed37b14aaea4a764531b181, type: 3}
+  - {fileID: 2800000, guid: c92e22a15e9d17048b8fe43dd722733c, type: 3}
+  RuneSpritePrefab: {fileID: 9044880738213478760, guid: 1627b02e565b2ed4e888ba8993735e52,
+    type: 3}
+  BadColorBase: {r: 0.4339623, g: 0.11521403, b: 0.06755074, a: 1}
+  BadColorGlow: {r: 0.754717, g: 0.5770323, b: 0.23139909, a: 1}
+  GoodColorBase: {r: 0.12936096, g: 0.1999821, b: 0.5377358, a: 1}
+  GoodColorGlow: {r: 0.4321378, g: 0.54492104, b: 0.7830189, a: 1}
