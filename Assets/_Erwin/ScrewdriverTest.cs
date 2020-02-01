@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class ScrewdriverTest : MonoBehaviour
 {
-
     #region Unity References
 
     public float m_MinTargetSize = 0.5f;

@@ -6,18 +6,12 @@ public class MinigameDisplayComponent : MonoBehaviour
 {
     // Set in inspector
 
-    public SpriteRenderer m_SpriteRenderer;
+    public MeshRenderer m_MeshRenderer;
 
     ////////////////////////////////////////////////////////////////
     
-    public Vector2 GetBounds()
+    public void SetRenderTexture(RenderTexture texture)
     {
-        return new Vector2(m_SpriteRenderer.transform.position.x, m_SpriteRenderer.transform.position.y) + m_SpriteRenderer.size;
+        m_MeshRenderer.material.SetTexture("_MainTex", texture);
     }
-
-    /*
-    * Use either world space UI or render textures for the minigames. I prefer render textures!
-    * Eeach game has its own plyace in the world and the render textures just fit automatically.
-    */
-
 }

@@ -36,7 +36,8 @@ public class GameManager : MonoBehaviour
 	public GameSettings settings => m_Settings;
 	public GameTickManager TickManager => m_GameTickManager;
 
-	public GameState State { get; private set; } = GameState.MainMenu;
+	public GameState State = GameState.MainMenu;
+   
 
 	public GameObject TutorialScreenGO { get; set; } = null;
 	public GameObject EndScreenGO { get; set; } = null;
