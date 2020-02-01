@@ -16,6 +16,8 @@ public class MachineInteraction : MonoBehaviour
 
 	#region Private Variables
 
+
+
 	#endregion
 
 	#region Public Methods

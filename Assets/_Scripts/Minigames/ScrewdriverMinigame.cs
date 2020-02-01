@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class ScrewdriverMinigame : BaseMinigame
 {
-
     #region Unity References
 
     public float m_MinTargetSize = 0.1f;
