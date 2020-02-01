@@ -10,22 +10,20 @@ public class MachineInteraction : MonoBehaviour
 
 	#region Public Properties
 
-	public bool canStartMinigame => m_CurrentMinigame == null;
+	public bool canStartMinigame => false;
 
 	#endregion
 
 	#region Private Variables
 
-	private BaseMinigame m_CurrentMinigame = null;
-
 	#endregion
 
 	#region Public Methods
 
-	public void InitiateMinigame()
+	public void InitiateMinigame(int playerID)
 	{
 		Debug.Log("InitiateMinigame");
-		m_CurrentMinigame = GameManager.Instance.MinigameManager.StartMinigame(m_MinigameType);
+		GameManager.Instance.MinigameManager.StartMinigame(GetComponent<MinigameDisplayComponent>(), m_MinigameType, playerID);
 	}
 
 	#endregion

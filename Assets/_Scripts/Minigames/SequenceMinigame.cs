@@ -128,16 +128,10 @@ public class SequenceMinigame : BaseMinigame
         {
             Texture2D texture = GameManager.Instance.settings.RuneTextures[(int) m_OriginalSequence[i]];
 
-<<<<<<< HEAD
-            GameObject spriteObject         = Object.Instantiate(GameManager.Instance.settings.RuneSpritePrefab, m_SequenceMinigameObject.transform);
-            spriteObject.transform.position = new Vector3(OFFSET_X + PADDING_X + (WIDTH -  2 * PADDING_X) / (float) m_OriginalSequence.Count * i, 0, 
-                                                         OFFSET_Y + PADDING_Y + (-Mathf.Cos((i / (float) m_OriginalSequence.Count) * Mathf.PI * 2.0f) * 0.5f + 0.5f) * RING_HEIGHT);
-=======
             GameObject spriteObject         = GameObject.Instantiate(GameManager.Instance.settings.RuneSpritePrefab);
             spriteObject.transform.parent   = m_SequenceMinigameObject.transform;
             spriteObject.transform.position = new Vector3(m_GamePlayRect.xMin + m_GamePlayRect.width * PADDING_X_FACTOR + (m_GamePlayRect.width - m_GamePlayRect.width * 2 * PADDING_X_FACTOR) / (float) m_OriginalSequence.Count * i, 0, 
                                                           m_GamePlayRect.yMin + m_GamePlayRect.height * PADDING_Y_FACTOR + (-Mathf.Cos((i / (float) m_OriginalSequence.Count) * Mathf.PI * 2.0f) * 0.5f + 0.5f) * m_GamePlayRect.height * RING_HEIGHT_FACTOR);
->>>>>>> 65e8e2e226dd80a33276014679e76783d26cffc6
 
             MeshRenderer renderer           = spriteObject.GetComponent<MeshRenderer>();
             

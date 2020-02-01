@@ -45,7 +45,7 @@ public abstract class BaseMinigame
 
         m_RenderTexture                         = new RenderTexture((int) rect.size.x * 64, (int) rect.size.y * 64, 24, RenderTextureFormat.Default);
         m_MinigameCamera.targetTexture          = m_RenderTexture;
-        //m_DisplayComponent.SetRenderTexture(m_RenderTexture);
+        m_DisplayComponent.SetRenderTexture(m_RenderTexture);
     }
 
     ////////////////////////////////////////////////////////////////

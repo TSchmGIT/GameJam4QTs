@@ -13,15 +13,15 @@ public class MinigameManager
             case MinigameType.Sequence:
             
                 SequenceMinigame sequenceMinigame = new SequenceMinigame();
-                sequenceMinigame.Setup(null, new Rect(100, 100, 10, 10), 0);
+                sequenceMinigame.Setup(display, new Rect(100, 100, 10, 10), 0);
 
                 BeginMinigame(sequenceMinigame);
             
             break;
-            case MinigameType.Scredriver:
+            case MinigameType.Screwdriver:
             
                 ScrewdriverMinigame screwdriverMinimap = new ScrewdriverMinigame();
-                screwdriverMinimap.Setup(null, new Rect(200, 100, 10, 10), 0);
+                screwdriverMinimap.Setup(display, new Rect(200, 100, 10, 10), 0);
 
                 BeginMinigame(screwdriverMinimap);
 
@@ -63,7 +63,7 @@ public class MinigameManager
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            StartMinigame(null, MinigameType.Scredriver, 0);
+            StartMinigame(null, MinigameType.Screwdriver, 0);
         }
 
     }

@@ -11,6 +11,7 @@ public class Player1Controller : MonoBehaviour
     public MachineInteraction m_MachineInRange = null;
     public Item m_ItemToPick = null;
     public Item m_HeldItem = null;
+	public int m_PlayerID = 0;
     public string m_VerticalAxisName = null;
     public string m_HorizontalAxisName = null;
     public KeyCode m_InteractKey = KeyCode.Space;
@@ -53,7 +54,7 @@ public class Player1Controller : MonoBehaviour
                 if (m_HeldItem != null)
                 {
                     Debug.Log("Execute Machine Interaction");
-					m_MachineInRange.InitiateMinigame();
+					m_MachineInRange.InitiateMinigame(m_PlayerID);
                 }
             }
         }
