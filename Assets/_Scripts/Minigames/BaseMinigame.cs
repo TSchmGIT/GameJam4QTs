@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,18 +24,25 @@ public enum MinigameTickResult
 
 public abstract class BaseMinigame
 {
+    int                         m_MiniGameID;
     MinigameDisplayComponent    m_DisplayComponent;
     int                         m_PlayerID;
+
+    public Action<MinigameTickResult>  FinishCallback;
+
 
     protected Rect              m_GamePlayRect;
     Camera                      m_MinigameCamera;
     RenderTexture               m_RenderTexture;
 
-    public void Setup(MinigameDisplayComponent displayComponent, Rect rect, int playerID)
+    public void Setup(int id, MinigameDisplayComponent displayComponent, Rect rect, int playerID, Action<MinigameTickResult> callback = null)
     {
+        m_MiniGameID                            = id;
         m_DisplayComponent                      = displayComponent;
         m_PlayerID                              = playerID;
         m_GamePlayRect                          = rect;
+        FinishCallback                          = callback;
+
         GameObject cameraObject                 = new GameObject("Minigame Camera");
         cameraObject.transform.localRotation    = Quaternion.Euler(90, 0, 0);
         m_MinigameCamera                        = cameraObject.AddComponent<Camera>();
@@ -46,6 +54,20 @@ public abstract class BaseMinigame
         m_RenderTexture                         = new RenderTexture((int) rect.size.x * 64, (int) rect.size.y * 64, 24, RenderTextureFormat.Default);
         m_MinigameCamera.targetTexture          = m_RenderTexture;
         m_DisplayComponent.SetRenderTexture(m_RenderTexture);
+    }
+
+    ////////////////////////////////////////////////////////////////
+   
+    public int GetMinigameID()
+    {
+        return m_MiniGameID;
+    }
+
+    ////////////////////////////////////////////////////////////////
+
+    public void CleanUp()
+    {
+        GameObject.Destroy(m_MinigameCamera.gameObject);
     }
 
     ////////////////////////////////////////////////////////////////
