@@ -29,12 +29,13 @@ public class GameManager : MonoBehaviour
 	#region Private Methods
 	private GameTickManager m_GameTickManager   = new GameTickManager();
     private MinigameManager m_MinigameManager   = new MinigameManager();
-
-	private GameState m_State = GameState.Game;
+    private GameState m_State = GameState.Game;
 	#endregion
 
 	#region Public Properties
 	public GameSettings settings => m_Settings;
+
+    public MinigameManager MinigameManager { get { return m_MinigameManager; } }
 
 	//public event Action OnGameStarted = null;
 	#endregion
@@ -46,7 +47,7 @@ public class GameManager : MonoBehaviour
 		DontDestroyOnLoad(gameObject);
 		Instance = this;
 
-		m_MinigameManager.Init();
+		MinigameManager.Init();
 	}
 
 	private void OnLevelWasLoaded(int level)
@@ -75,7 +76,7 @@ public class GameManager : MonoBehaviour
 				m_GameTickManager.Init();
 				m_GameTickManager.Tick();
                 
-                m_MinigameManager.Tick();
+                MinigameManager.Tick();
 				break;
 			case GameState.PostGame:
 				break;
