@@ -10,6 +10,9 @@ public class MinigameFactory
         {
             case MinigameType.Sequence:
                 return new SequenceMinigame();
+            case MinigameType.Scredriver:
+                return new ScrewdriverMinigame();
+
             default:
                 Debug.LogError("Not implemented yet");
                 break;

@@ -7,6 +7,7 @@ using UnityEngine;
 public enum MinigameType
 {
     Sequence    = 0,
+    Scredriver  = 1
 }
 
 ////////////////////////////////////////////////////////////////
