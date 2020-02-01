@@ -429,6 +429,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Settings: {fileID: 11400000, guid: 645f5907cb7fa4f46b3a257596dd8ebb, type: 2}
+  m_GameTickManager: {fileID: 0}
+  State: 2
 --- !u!4 &1079556115
 Transform:
   m_ObjectHideFlags: 0

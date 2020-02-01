@@ -10,7 +10,7 @@ public class MinigameFactory
         {
             case MinigameType.Sequence:
                 return new SequenceMinigame();
-            case MinigameType.Scredriver:
+            case MinigameType.Screwdriver:
                 return new ScrewdriverMinigame();
 
             default:
