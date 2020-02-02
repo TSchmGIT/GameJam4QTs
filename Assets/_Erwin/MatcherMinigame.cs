@@ -97,19 +97,19 @@ public class MatcherMinigame : BaseMinigame
 
     public override MinigameTickResult Tick()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(GetKeyCode(InputHelper.Keys.Up)))
         {
             return GuessTop();
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(GetKeyCode(InputHelper.Keys.Right)))
         {
             return GuessRight();
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(GetKeyCode(InputHelper.Keys.Down)))
         {
             return GuessDown();
         }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(GetKeyCode(InputHelper.Keys.Left)))
         {
             return GuessLeft();
         }
