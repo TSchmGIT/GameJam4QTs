@@ -67,10 +67,19 @@ public class Item : MonoBehaviour
 
 	private void UpdateConveyorBelt()
 	{
+        Vector3 oldPosition = transform.position;
 		foreach (ConveyorBelt conveyorBelt in m_ConveyorBeltList)
 		{
+            
 			transform.position += conveyorBelt.transform.forward * conveyorBelt.speed * Time.deltaTime;
 		}
+
+        if (transform.position != oldPosition)
+        {
+            transform.rotation = Quaternion.LookRotation(-transform.position + oldPosition, Vector3.up);
+
+        }
+
 	}
 
 	public void SetRuntimeData(ItemRuntimeData runtimeData)

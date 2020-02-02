@@ -716,7 +716,7 @@ MonoBehaviour:
   m_MachineInRange: {fileID: 0}
   m_ItemToPick: {fileID: 0}
   m_HeldItem: {fileID: 0}
-  m_PlayerID: 0
+  m_PlayerID: 1
   m_VerticalAxisName: VerticalPlayer2
   m_HorizontalAxisName: HorizontalPlayer2
   m_InteractKey: 13
