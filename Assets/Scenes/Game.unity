@@ -890,6 +890,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -11.82
       objectReference: {fileID: 0}
+    - target: {fileID: 3463160706114438141, guid: e33086455cfdfd940abc12b45bdb8c88,
+        type: 3}
+      propertyPath: m_ConveyorSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3542649009324170737, guid: e33086455cfdfd940abc12b45bdb8c88,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
