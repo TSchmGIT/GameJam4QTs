@@ -10,6 +10,13 @@ public class GameSettings : ScriptableObject
 
 	public bool ShowTutorialScreen = true;
 
+    [Header("Items")]
+    public Mesh         ItemMeshNoStageLeft;
+    public List<Mesh>   ItemMeshMinigames;
+    public Color        ItemColorNoStageLeft;
+    public List<Color>  ItemColorMinigames;
+
+
     [Header("Minigame: Sequence")]
     public Texture2D[] RuneTextures;
     public GameObject RuneSpritePrefab;

@@ -10,7 +10,9 @@ public enum MinigameType
     Sequence        = 0,
     Screwdriver     = 1,
 	Morse           = 2,
-    Matcher         = 3
+    Matcher         = 3,
+
+    Count           = 4
 }
 
 ////////////////////////////////////////////////////////////////

@@ -51,10 +51,10 @@ public class Player1Controller : MonoBehaviour
         {
             if (Input.GetKeyDown(m_InteractKey))
             {
-                if (m_HeldItem != null)
+                if (m_HeldItem != null && m_HeldItem.IsEligbleForMachine(m_MachineInRange))
                 {
                     Debug.Log("Execute Machine Interaction");
-					m_MachineInRange.InitiateMinigame(m_PlayerID);
+					m_MachineInRange.InitiateMinigame(m_PlayerID, m_HeldItem);
                 }
             }
         }
