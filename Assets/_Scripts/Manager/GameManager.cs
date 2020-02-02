@@ -86,8 +86,6 @@ public class GameManager : MonoBehaviour
 			case GameState.PreGame:
 				break;
 			case GameState.Game:
-				//m_GameTickManager.Tick();
-
 				MinigameManager.Tick();
 				break;
 			case GameState.PostGame:
