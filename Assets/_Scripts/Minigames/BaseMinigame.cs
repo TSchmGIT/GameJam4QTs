@@ -71,10 +71,11 @@ public abstract class BaseMinigame
 
     ////////////////////////////////////////////////////////////////
 
-    public void CleanUp()
+    public void CleanUp(MinigameTickResult result)
     {
         GameObject.Destroy(m_MinigameCamera.gameObject);
         m_DisplayComponent.SetRenderTexture(null);
+        m_DisplayComponent.ReactToMinigameResult(result);
     }
 
     ////////////////////////////////////////////////////////////////
