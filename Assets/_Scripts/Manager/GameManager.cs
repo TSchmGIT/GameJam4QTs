@@ -25,7 +25,8 @@ public class GameManager : MonoBehaviour
 	private GameSettings m_Settings = null;
 
 	[SerializeField]
-	private GameTickManager m_GameTickManager   = new GameTickManager();
+	private GameTickManager m_GameTickManager;
+	private ItemManager m_ItemManager;
 	#endregion
 
 	#region Private Methods
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
 	#region Public Properties
 	public GameSettings settings => m_Settings;
 	public GameTickManager TickManager => m_GameTickManager;
+    public ItemManager ItemManager => m_ItemManager;
 
 	public GameState State = GameState.MainMenu;
    
