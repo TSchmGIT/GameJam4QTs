@@ -33,4 +33,7 @@ public class GameSettings : ScriptableObject
     [Header("Minigame: Screwdriver")]
     public GameObject ScrewDriverTargetPrefab;
     public GameObject ScrewDriverPinPrefab;
+
+    [Header("Minigame: Matcher")]
+    public List<Texture2D> VirusGraphics;
 }
