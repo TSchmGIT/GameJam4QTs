@@ -28,7 +28,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2724d548a8f94b8428c2063aaba730c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ConveyorSpeed: 2
+  m_ConveyorSpeed: 0.5
 --- !u!1 &529693869032156723
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,7 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2724d548a8f94b8428c2063aaba730c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ConveyorSpeed: 5
+  m_ConveyorSpeed: 2
 --- !u!1 &1508413557142979346
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,6 +329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MinigameType: 1
+  m_MachineBlockedAfterGame: 0.1
 --- !u!114 &5967153123950056731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -868,6 +869,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MinigameType: 1
+  m_MachineBlockedAfterGame: 0.1
 --- !u!114 &206454720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -910,6 +912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MinigameType: 0
+  m_MachineBlockedAfterGame: 0.1
 --- !u!114 &2014502227038438522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1012,7 +1015,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2724d548a8f94b8428c2063aaba730c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ConveyorSpeed: 2
+  m_ConveyorSpeed: 0.5
 --- !u!54 &3463160706265880037
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1041,7 +1044,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2724d548a8f94b8428c2063aaba730c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ConveyorSpeed: 2
+  m_ConveyorSpeed: 0.5
 --- !u!54 &3463160706114438142
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1070,7 +1073,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2724d548a8f94b8428c2063aaba730c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ConveyorSpeed: 5
+  m_ConveyorSpeed: 2
 --- !u!54 &3463160705811055066
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1099,7 +1102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2724d548a8f94b8428c2063aaba730c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ConveyorSpeed: 2
+  m_ConveyorSpeed: -5
 --- !u!1 &8787115843214412162
 GameObject:
   m_ObjectHideFlags: 0
@@ -1223,6 +1226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MinigameType: 2
+  m_MachineBlockedAfterGame: 0.1
 --- !u!114 &6526911685092483702
 MonoBehaviour:
   m_ObjectHideFlags: 0
