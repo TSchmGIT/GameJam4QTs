@@ -62,7 +62,7 @@ public class ScrewdriverMinigame : BaseMinigame
             m_PinMovesLeft = true;
         }
 
-        if (m_PinObject.transform.localPosition.x > m_TargetObject.transform.localPosition.x - m_BarSpawn)
+        if (m_PinObject.transform.localPosition.x < m_TargetObject.transform.localPosition.x - m_BarSpawn)
         {
             m_PinMovesLeft = false;
         }
@@ -87,8 +87,8 @@ public class ScrewdriverMinigame : BaseMinigame
 
     MinigameTickResult CheckPlayerSuccess()
     {
-        if (m_PinObject.transform.localPosition.x > m_LeftTarget && 
-            m_PinObject.transform.localPosition.x < m_RightTarget)
+        if (m_PinObject.transform.position.x > m_LeftTarget && 
+            m_PinObject.transform.position.x < m_RightTarget)
         {
             return MinigameTickResult.EarlySuccess;
         }
