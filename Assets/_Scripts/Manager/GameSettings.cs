@@ -18,7 +18,19 @@ public class GameSettings : ScriptableObject
     public Color GoodColorBase;
     public Color GoodColorGlow;
 
-    [Header("Minigame: Screqdriver")]
+	[Header("Minigame: Morse")]
+	public GameObject MorseSoundPrefab;
+	public Color MorseColorPlayback;
+	public Color MorseColorInput;
+	public float ShortPlaybackTime;
+	public float ShortInputTolerance;
+	public float LongPlaybackTime;
+	public float LongInputTolerance;
+	public float InputDelayTolerance;
+	public int AmountSoundsPerSequence;
+	public int MaxAmountLongSoundsPerSequence;
+
+    [Header("Minigame: Screwdriver")]
     public GameObject ScrewDriverTargetPrefab;
     public GameObject ScrewDriverPinPrefab;
 }

@@ -14,6 +14,7 @@ public class MorseSound : MonoBehaviour
 
 	private float m_MorseDuration = 0.0f;
 	private float? m_MorseStartpoint = 0.0f;
+	private Color m_Color;
 	#endregion
 
 	#region Unity Callback
@@ -42,6 +43,7 @@ public class MorseSound : MonoBehaviour
 		// Update fade
 		float fadefactor = 1.0f - Mathf.Clamp01((Time.time - m_MorseStartpoint.Value) / m_MorseDuration);
 		Color currentColor = m_MeshRenderer.material.GetColor("_Color");
+		currentColor = m_Color;
 		currentColor.a = fadefactor;
 		m_MeshRenderer.material.SetColor("_Color", currentColor);
 	}
@@ -50,10 +52,11 @@ public class MorseSound : MonoBehaviour
 
 	#region Public Methods
 
-	public void SetMorseDuration(float duration)
+	public void SetMorseDuration(float duration, Color color)
 	{
 		m_MorseStartpoint = Time.time;
 		m_MorseDuration = duration;
+		m_Color = color;
 	}
 
 	#endregion

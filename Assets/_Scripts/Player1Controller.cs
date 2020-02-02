@@ -28,7 +28,6 @@ public class Player1Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         //Horizontal and Vertical movement of the player character
         float hor = Input.GetAxis(m_HorizontalAxisName);
         Vector3 horVector = Vector3.right * hor;
