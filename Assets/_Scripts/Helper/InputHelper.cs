@@ -38,7 +38,7 @@ public static class InputHelper
                 case Keys.Right:        return KeyCode.RightArrow;
                 case Keys.Down:         return KeyCode.DownArrow;
                 case Keys.Left:         return KeyCode.LeftArrow;
-                case Keys.Action:       return KeyCode.Backspace;
+                case Keys.Action:       return KeyCode.Return;
             }
         }
 
