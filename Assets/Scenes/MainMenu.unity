@@ -349,12 +349,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1956163251590316373, guid: 5056d0d4f687ff04790ac1e449368935,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 80b1c8b80c10c9e4daaf6a3397be1794,
-        type: 3}
     - target: {fileID: 2399115246489034234, guid: 5056d0d4f687ff04790ac1e449368935,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -465,82 +459,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainMenu
       objectReference: {fileID: 0}
-    - target: {fileID: 2399115246688952237, guid: 5056d0d4f687ff04790ac1e449368935,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2399115246688952237, guid: 5056d0d4f687ff04790ac1e449368935,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2399115247386880044, guid: 5056d0d4f687ff04790ac1e449368935,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2399115247386880044, guid: 5056d0d4f687ff04790ac1e449368935,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2996923142412019043, guid: 5056d0d4f687ff04790ac1e449368935,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -3560698593848636649, guid: b0de1eb944200744793097982277efca,
-        type: 3}
-    - target: {fileID: 4766030609398983147, guid: 5056d0d4f687ff04790ac1e449368935,
-        type: 3}
-      propertyPath: m_Name
-      value: Button_Credits
-      objectReference: {fileID: 0}
-    - target: {fileID: 6613566959771301991, guid: 5056d0d4f687ff04790ac1e449368935,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 1959ca6ea5b1062419608fe51a3b6b29,
-        type: 3}
-    - target: {fileID: 7143861760301252340, guid: 5056d0d4f687ff04790ac1e449368935,
-        type: 3}
-      propertyPath: m_Name
-      value: Button_Options
-      objectReference: {fileID: 0}
-    - target: {fileID: 7177153196739966197, guid: 5056d0d4f687ff04790ac1e449368935,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 594
-      objectReference: {fileID: 0}
-    - target: {fileID: 7177153196739966197, guid: 5056d0d4f687ff04790ac1e449368935,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 167
-      objectReference: {fileID: 0}
-    - target: {fileID: 7177153196739966197, guid: 5056d0d4f687ff04790ac1e449368935,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.83043
-      objectReference: {fileID: 0}
-    - target: {fileID: 7177153196739966197, guid: 5056d0d4f687ff04790ac1e449368935,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.83043
-      objectReference: {fileID: 0}
-    - target: {fileID: 7177153196739966197, guid: 5056d0d4f687ff04790ac1e449368935,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.83043
-      objectReference: {fileID: 0}
-    - target: {fileID: 7988050017821061728, guid: 5056d0d4f687ff04790ac1e449368935,
-        type: 3}
-      propertyPath: m_Name
-      value: Button_Quit
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1911112901176958649, guid: 5056d0d4f687ff04790ac1e449368935, type: 3}
-    - {fileID: 5897695949626131165, guid: 5056d0d4f687ff04790ac1e449368935, type: 3}
-    - {fileID: 1791671524888059365, guid: 5056d0d4f687ff04790ac1e449368935, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5056d0d4f687ff04790ac1e449368935, type: 3}
 --- !u!1 &1549712897
 GameObject:
