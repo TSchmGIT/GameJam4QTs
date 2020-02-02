@@ -10,10 +10,10 @@ public class JuiceHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //foreach (VolumetricLines.VolumetricLineBehavior line in m_Lines)
-        //{
-        //    line.LineColor.
-        //}
+        foreach (VolumetricLines.VolumetricLineBehavior line in m_Lines)
+        {
+            line.LineColor = Color.green;
+        }
     }
 
     // Update is called once per frame

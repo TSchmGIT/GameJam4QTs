@@ -62,7 +62,7 @@ public class MinigameManager
             if (result != MinigameTickResult.ContinueTick)
             {
                 m_CurrentMinigames[i].FinishCallback?.Invoke(result);
-                m_CurrentMinigames[i].CleanUp();
+                m_CurrentMinigames[i].CleanUp(result);
                 m_CurrentMinigames[i].Finish();
                 m_CurrentMinigames.RemoveAt(i);
                 i--;
