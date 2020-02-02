@@ -91,7 +91,6 @@ public class MorseMinigame : BaseMinigame
 
 	private bool TickPlayback()
 	{
-		Debug.Log("TickPlayback()");
 		if (m_SequenceIndex < 0 || m_SequenceIndex >= m_MorseTypeSequence.Count)
 		{
 			return true;
@@ -113,12 +112,10 @@ public class MorseMinigame : BaseMinigame
 		}
 
 		return false;
-
 	}
 
 	private MinigameTickResult TickInput()
 	{
-		//Debug.Log("TickInput()"); 
 		MorseType morseType = m_MorseTypeSequence[m_SequenceIndex]; 
 
 		KeyCode actionKeyCode = GetKeyCode(InputHelper.Keys.Action);
