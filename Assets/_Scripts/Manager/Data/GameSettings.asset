@@ -27,6 +27,7 @@ MonoBehaviour:
   - {r: 0.6792453, g: 0.086507656, b: 0.28199401, a: 1}
   - {r: 0.2681888, g: 0.6981132, b: 0.121840514, a: 1}
   - {r: 1, g: 0.5486495, b: 0, a: 1}
+  ItemScorePerMinigameDone: 0
   RuneTextures:
   - {fileID: 2800000, guid: 0b6b2416412e0f54e9dd593c0d35d958, type: 3}
   - {fileID: 2800000, guid: 83ac1361960099c4890ed8b75ec9555f, type: 3}

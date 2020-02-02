@@ -28,11 +28,7 @@ public class GameManager : MonoBehaviour
 	private GameTickManager m_GameTickManager;
 	private ItemManager m_ItemManager;
 	#endregion
-
-	#region Private Methods
-	private MinigameManager m_MinigameManager   = new MinigameManager();
-	#endregion
-
+	
 	#region Public Properties
 	public GameSettings settings => m_Settings;
 	public GameTickManager TickManager => m_GameTickManager;
@@ -44,7 +40,7 @@ public class GameManager : MonoBehaviour
 	public GameObject TutorialScreenGO { get; set; } = null;
 	public GameObject EndScreenGO { get; set; } = null;
 
-	public MinigameManager MinigameManager { get { return m_MinigameManager; } }
+	public MinigameManager MinigameManager { get; private set; } = new MinigameManager();
 
 	//public event Action OnGameStarted = null;
 	#endregion
@@ -140,6 +136,9 @@ public class GameManager : MonoBehaviour
 
 	private void SetupNewGame(object showTutorialScreen)
 	{
+		MinigameManager = new MinigameManager();
+		MinigameManager.Init();
+
 		State = m_Settings.ShowTutorialScreen ? GameState.PreGame : GameState.Game;
 
 		ShowTutorialScreen(m_Settings.ShowTutorialScreen);

@@ -459,6 +459,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 2399115246688952237, guid: 5056d0d4f687ff04790ac1e449368935,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2399115246688952237, guid: 5056d0d4f687ff04790ac1e449368935,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5056d0d4f687ff04790ac1e449368935, type: 3}
 --- !u!1 &1549712897
