@@ -10,11 +10,15 @@ public class MachineInteraction : MonoBehaviour
 
 	#region Public Properties
 	private bool m_CurrentlyPlayingMinigame = false;
-	public bool CanStartMinigame => !m_CurrentlyPlayingMinigame;
+	public bool CanStartMinigame => !m_CurrentlyPlayingMinigame && (m_LastEndedTimestamp + m_MachineBlockedAfterGame) <= Time.time;
+
+	public float m_MachineBlockedAfterGame = 0.1f;
 
 	#endregion
 
 	#region Private Variabless
+
+	private float m_LastEndedTimestamp = 0.0f;
 
 	#endregion
 
@@ -31,6 +35,7 @@ public class MachineInteraction : MonoBehaviour
 	{
 		Debug.Log("I am a machine, my name is " + gameObject.name + " and I finished a minigame with result " + tickResult.ToString());
 		m_CurrentlyPlayingMinigame = false;
+		m_LastEndedTimestamp = Time.time;
 	}
 
 	#endregion
