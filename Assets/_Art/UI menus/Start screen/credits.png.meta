@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: -3560698593848636649
     second: credits_0
+  - first:
+      213: 4247348734372425677
+    second: credits_1
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -87,7 +90,28 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: credits_0
+      rect:
+        serializedVersion: 2
+        x: 670
+        y: 454
+        width: 594
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71b4b698e7bd59ec0800000000000000
+      internalID: -3560698593848636649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
