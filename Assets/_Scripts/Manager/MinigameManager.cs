@@ -55,6 +55,14 @@ public class MinigameManager
 
     public void Tick()
     {
+		if (GameManager.Instance.State != GameManager.GameState.Game)
+		{
+			for (int i = 0; i < m_CurrentMinigames.Count; i++)
+			{
+				m_CurrentMinigames[i].CleanUp();
+			}
+		}
+
         for (int i = 0; i < m_CurrentMinigames.Count; i++)
         {
             MinigameTickResult result = m_CurrentMinigames[i].Tick();

@@ -36,6 +36,11 @@ public class MachineInteraction : MonoBehaviour
 
 	private void OnMachineInteractionFinished(MinigameTickResult tickResult)
 	{
+		if (gameObject == null)
+		{
+			return;
+		}
+
 		Debug.Log("I am a machine, my name is " + gameObject.name + " and I finished a minigame with result " + tickResult.ToString());
 		m_CurrentlyPlayingMinigame = false;
 		m_LastEndedTimestamp = Time.time;
