@@ -28,6 +28,11 @@ public class MinigameManager
 				minigame = new MorseMinigame();
 				minigame.Setup(m_CurrentMinigameID, display, new Rect(300, 100, 10, 10), playerID, callback);
 				break;
+			case MinigameType.Matcher:
+
+				minigame = new MatcherMinigame();
+				minigame.Setup(m_CurrentMinigameID, display, new Rect(400, 100, 10, 10), playerID, callback);
+				break;
         }
 
         BeginMinigame(minigame);

@@ -7,9 +7,10 @@ using UnityEngine;
 
 public enum MinigameType
 {
-    Sequence    = 0,
-    Screwdriver  = 1,
-	Morse = 2
+    Sequence        = 0,
+    Screwdriver     = 1,
+	Morse           = 2,
+    Matcher         = 3
 }
 
 ////////////////////////////////////////////////////////////////
@@ -71,6 +72,7 @@ public abstract class BaseMinigame
     public void CleanUp()
     {
         GameObject.Destroy(m_MinigameCamera.gameObject);
+        m_DisplayComponent.SetRenderTexture(null);
     }
 
     ////////////////////////////////////////////////////////////////

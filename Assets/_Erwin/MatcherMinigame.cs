@@ -2,160 +2,166 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MatcherMinigame : MonoBehaviour
+public class MatcherMinigame : BaseMinigame
 {
-
-    #region Unity References
-
-    public List<GameObject> m_Viruses;
-    public GameObject m_Target = null;
-    public GameObject m_UpPos = null;
-    public GameObject m_RightPos = null;
-    public GameObject m_DownPos = null;
-    public GameObject m_LeftPos = null;
-    int m_Index = 0;
+    int m_IndexMiddle = 0;
     int m_IndexUp = 0;
     int m_IndexRight = 0;
     int m_IndexDown = 0;
     int m_IndexLeft = 0;
-    GameObject pickedVirusTarget = null;
-    GameObject pickedVirusUp = null;
-    GameObject pickedVirusRight = null;
-    GameObject pickedVirusDown = null;
-    GameObject pickedVirusLeft = null;
+    
+    Texture2D pickedVirusTarget    = null;
+    Texture2D pickedVirusUp        = null;
+    Texture2D pickedVirusRight     = null;
+    Texture2D pickedVirusDown      = null;
+    Texture2D pickedVirusLeft      = null;
 
-    #endregion
+    
+    ////////////////////////////////////////////////////////////////
 
-    // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        List<Texture2D> virusTextures = new List<Texture2D>();
+        for (int i = 0; i < GameManager.Instance.settings.VirusGraphics.Count; i++)
+        {
+            virusTextures.Add(GameManager.Instance.settings.VirusGraphics[i]);
+        }
+
+        ////////////////////////////////////////////////////////////////
+        // 1) Find Scene References (by name bc we are hacky af)
+        
+        GameObject displayObjectMiddle      = GameObject.Find("Matcher_Middle");
+        GameObject displayObjectUp          = GameObject.Find("Matcher_Up");
+        GameObject displayObjectRight       = GameObject.Find("Matcher_Right");
+        GameObject displayObjectDown        = GameObject.Find("Matcher_Down");
+        GameObject displayObjectLeft        = GameObject.Find("Matcher_Left");
+
+        ////////////////////////////////////////////////////////////////
+        // 2) Setup Images
+        // * We pick the virus to be the target of the game
+        // * Then we pick the virus for the side options. Everytime we decided on one type of virus for a side display, we remove it from the options fpr the next one.
 
         //Pick a virus to be the middle target
-        m_Index = Random.Range(0, m_Viruses.Count);
-        pickedVirusTarget = m_Viruses[m_Index];
-
-        MeshRenderer rendererOfVirus = pickedVirusTarget.GetComponent<MeshRenderer>();
-        var textureOfVirus = rendererOfVirus.material.GetTexture("_MainTex");
-        MeshRenderer rendererOfTarget = m_Target.GetComponent<MeshRenderer>();
-        rendererOfTarget.material.SetTexture("_MainTex", textureOfVirus);
+        m_IndexMiddle                   = Random.Range(0, virusTextures.Count);
+        pickedVirusTarget               = virusTextures[m_IndexMiddle];
         
+        MeshRenderer rendererOfTarget = displayObjectMiddle.GetComponent<MeshRenderer>();
+        rendererOfTarget.material.SetTexture("_MainTex", pickedVirusTarget);
+        
+        ////////////////////////////////////////////////////////////////
+
         //Pick a virus to be the "up" option
-        m_IndexUp = Random.Range(0, m_Viruses.Count);
-        pickedVirusUp = m_Viruses[m_IndexUp];
+        m_IndexUp                       = Random.Range(0, virusTextures.Count);
+        pickedVirusUp                   = virusTextures[m_IndexUp];
+        MeshRenderer rendererOfUp       = displayObjectUp.GetComponent<MeshRenderer>();
+        rendererOfUp.material.SetTexture("_MainTex", pickedVirusUp);
 
-        MeshRenderer rendererOfVirusUp = pickedVirusUp.GetComponent<MeshRenderer>();
-        var textureOfVirusUp = rendererOfVirusUp.material.GetTexture("_MainTex");
-        MeshRenderer rendererOfUp = m_UpPos.GetComponent<MeshRenderer>();
-        rendererOfUp.material.SetTexture("_MainTex", textureOfVirusUp);
-
-        m_Viruses.Remove(pickedVirusUp);
+        virusTextures.Remove(pickedVirusUp);
 
         //Pick a virus to be the "right" option
-        m_IndexRight = Random.Range(0, m_Viruses.Count);
-        pickedVirusRight = m_Viruses[m_IndexRight];
+        m_IndexRight                    = Random.Range(0, virusTextures.Count);
+        pickedVirusRight                = virusTextures[m_IndexRight];
+        MeshRenderer rendererOfRight    = displayObjectRight.GetComponent<MeshRenderer>();
+        rendererOfRight.material.SetTexture("_MainTex", pickedVirusRight);
 
-        MeshRenderer rendererOfVirusRight = pickedVirusRight.GetComponent<MeshRenderer>();
-        var textureOfVirusRight = rendererOfVirusRight.material.GetTexture("_MainTex");
-        MeshRenderer rendererOfRight = m_RightPos.GetComponent<MeshRenderer>();
-        rendererOfRight.material.SetTexture("_MainTex", textureOfVirusRight);
-
-        m_Viruses.Remove(pickedVirusRight);
+        virusTextures.Remove(pickedVirusRight);
 
         //Pick a virus to be the "down" option
-        m_IndexDown = Random.Range(0, m_Viruses.Count);
-        pickedVirusDown = m_Viruses[m_IndexDown];
+        m_IndexDown                     = Random.Range(0, virusTextures.Count);
+        pickedVirusDown                 = virusTextures[m_IndexDown];
+        MeshRenderer rendererOfDown     = displayObjectDown.GetComponent<MeshRenderer>();
+        rendererOfDown.material.SetTexture("_MainTex", pickedVirusDown);
 
-        MeshRenderer rendererOfVirusDown = pickedVirusDown.GetComponent<MeshRenderer>();
-        var textureOfVirusDown = rendererOfVirusDown.material.GetTexture("_MainTex");
-        MeshRenderer rendererOfDown = m_DownPos.GetComponent<MeshRenderer>();
-        rendererOfDown.material.SetTexture("_MainTex", textureOfVirusDown);
-
-        m_Viruses.Remove(pickedVirusDown);
+        virusTextures.Remove(pickedVirusDown);
 
         //Pick a virus to be the "left" option
-        pickedVirusLeft = m_Viruses[0];
+        m_IndexLeft                     = Random.Range(0, virusTextures.Count);
+        pickedVirusLeft                 = virusTextures[m_IndexLeft];
+        MeshRenderer rendererOfLeft     = displayObjectLeft.GetComponent<MeshRenderer>();
+        rendererOfLeft.material.SetTexture("_MainTex", pickedVirusLeft);
 
-        MeshRenderer rendererOfVirusLeft = pickedVirusLeft.GetComponent<MeshRenderer>();
-        var textureOfVirusLeft = rendererOfVirusLeft.material.GetTexture("_MainTex");
-        MeshRenderer rendererOfLeft = m_LeftPos.GetComponent<MeshRenderer>();
-        rendererOfLeft.material.SetTexture("_MainTex", textureOfVirusLeft);
-
-        Debug.Log(pickedVirusTarget);
-        Debug.Log(pickedVirusUp);
-        Debug.Log(pickedVirusRight);
-        Debug.Log(pickedVirusDown);
-        Debug.Log(pickedVirusLeft);
-
+        //Debug.Log("Target: " + pickedVirusTarget.name);
+        //Debug.Log(pickedVirusUp.name);
+        //Debug.Log(pickedVirusRight.name);
+        //Debug.Log(pickedVirusDown.name);
+        //Debug.Log(pickedVirusLeft.name);
     }
 
-    // Update is called once per frame
-    void Update()
+    ////////////////////////////////////////////////////////////////
+
+    public override void Finish()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            GuessTop();
-        }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            GuessRight();
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            GuessDown();
-        }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            GuessLeft();
-        }
+        return;
     }
+    ////////////////////////////////////////////////////////////////
 
-    void GuessTop()
+    public override MinigameTickResult Tick()
+    {
+        if (Input.GetKeyDown(GetKeyCode(InputHelper.Keys.Up)))
+        {
+            return GuessTop();
+        }
+        if (Input.GetKeyDown(GetKeyCode(InputHelper.Keys.Right)))
+        {
+            return GuessRight();
+        }
+        if (Input.GetKeyDown(GetKeyCode(InputHelper.Keys.Down)))
+        {
+            return GuessDown();
+        }
+        if (Input.GetKeyDown(GetKeyCode(InputHelper.Keys.Left)))
+        {
+            return GuessLeft();
+        }
+
+        return MinigameTickResult.ContinueTick;
+    }
+    
+    MinigameTickResult GuessTop()
     {
         if (pickedVirusTarget == pickedVirusUp)
         {
-            Debug.Log("Success");
+            return MinigameTickResult.EarlySuccess;
         }
         else
         {
-            Debug.Log("Fail");
+            return MinigameTickResult.Failed;
         }
     }
 
-    void GuessRight()
+    MinigameTickResult GuessRight()
     {
         if (pickedVirusTarget == pickedVirusRight)
         {
-            Debug.Log("Success");
+            return MinigameTickResult.EarlySuccess;
         }
         else
         {
-            Debug.Log("Fail");
+            return MinigameTickResult.Failed;
         }
     }
 
-    void GuessDown()
+    MinigameTickResult GuessDown()
     {
         if (pickedVirusTarget == pickedVirusDown)
         {
-            Debug.Log("Success");
+            return MinigameTickResult.EarlySuccess;
         }
         else
         {
-            Debug.Log("Fail");
+            return MinigameTickResult.Failed;
         }
     }
 
-    void GuessLeft()
+    MinigameTickResult GuessLeft()
     {
         if (pickedVirusTarget == pickedVirusLeft)
         {
-            Debug.Log("Success");
+            return MinigameTickResult.EarlySuccess;
         }
         else
         {
-            Debug.Log("Fail");
+            return MinigameTickResult.Failed;
         }
     }
-
-
 }

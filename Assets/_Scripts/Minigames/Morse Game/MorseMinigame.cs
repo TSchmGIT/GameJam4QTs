@@ -118,7 +118,7 @@ public class MorseMinigame : BaseMinigame
 
 	private MinigameTickResult TickInput()
 	{
-		Debug.Log("TickInput()"); 
+		//Debug.Log("TickInput()"); 
 		MorseType morseType = m_MorseTypeSequence[m_SequenceIndex]; 
 
 		KeyCode actionKeyCode = GetKeyCode(InputHelper.Keys.Action);

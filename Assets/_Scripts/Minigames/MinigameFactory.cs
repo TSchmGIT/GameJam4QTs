@@ -4,21 +4,23 @@ using UnityEngine;
 
 public class MinigameFactory
 {
-    public static BaseMinigame CreateMinigame(MinigameType type)
-    {
-        switch (type)
-        {
-            case MinigameType.Sequence:
-                return new SequenceMinigame();
-            case MinigameType.Screwdriver:
-                return new ScrewdriverMinigame();
+	public static BaseMinigame CreateMinigame(MinigameType type)
+	{
+		switch (type)
+		{
+			case MinigameType.Sequence:
+				return new SequenceMinigame();
+			case MinigameType.Screwdriver:
+				return new ScrewdriverMinigame();
 			case MinigameType.Morse:
 				return new MorseMinigame();
-            default:
-                Debug.LogError("Not implemented yet");
-                break;
-        }
+			case MinigameType.Matcher:
+				return new MatcherMinigame();
+			default:
+				Debug.LogError("Not implemented yet");
+				break;
+		}
 
-        return null;
-    }
+		return null;
+	}
 }
