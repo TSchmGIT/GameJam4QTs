@@ -72,15 +72,12 @@ public class ItemManager : MonoBehaviour
 
 		int amountOfMachinesRequired = Random.Range(settings.MinAmountMachines, settings.MaxAmountMachines + 1);
 
-		List<int> machineIndexList = new List<int>{ 1, 2, 3, 4 };
+		List<MinigameType> machineIndexList = new List<MinigameType>();
 
-		for (int i = 0; i < 4 - amountOfMachinesRequired; ++i)
+		for (int i = 0; i < amountOfMachinesRequired; ++i)
 		{
-			int randIndex = Random.Range(0, machineIndexList.Count);
-
-			int machineIndex = machineIndexList[randIndex];
-
-			machineIndexList.RemoveAt(randIndex);
+			int randIndex = Mathf.RoundToInt(Random.value * ((int) MinigameType.Count - 1));
+			machineIndexList.Add((MinigameType) randIndex);
 		}
 
 		ItemRuntimeData runtimeData;
