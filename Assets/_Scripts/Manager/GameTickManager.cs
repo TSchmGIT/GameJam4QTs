@@ -60,6 +60,7 @@ public class GameTickManager : MonoBehaviour
 	{
 		m_GameTimeLeft = GameManager.Instance.settings.GameTime;
 		m_StartCountdownTimer = GameManager.Instance.settings.CountdownTime;
+		Points = 0;
 
 		OnCountdownStarted?.Invoke();
 	}
