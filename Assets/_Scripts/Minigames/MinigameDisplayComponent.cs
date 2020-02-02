@@ -7,8 +7,16 @@ public class MinigameDisplayComponent : MonoBehaviour
     // Set in inspector
 
     public MeshRenderer m_MeshRenderer;
-
+    Color baseColor = Color.black;
     public VolumetricLines.VolumetricLineBehavior[] m_Lines = null;
+
+    private void Start()
+    {
+        foreach (VolumetricLines.VolumetricLineBehavior line in m_Lines)
+        {
+            line.LineColor = baseColor;
+        }
+    }
 
     ////////////////////////////////////////////////////////////////
 
@@ -27,7 +35,7 @@ public class MinigameDisplayComponent : MonoBehaviour
         float time = 0.0f;
         float totalTime = 0.5f;
 
-        Color startColor = Color.white;
+        Color startColor = baseColor;
         Color targetColor = result == MinigameTickResult.EarlySuccess ? Color.green : Color.red;
 
         Debug.Log("Animate Success/Fail");
