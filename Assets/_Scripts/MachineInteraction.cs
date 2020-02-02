@@ -20,16 +20,19 @@ public class MachineInteraction : MonoBehaviour
 
 	private float m_LastEndedTimestamp = 0.0f;
 
+    private Item m_InitiatedWithItem;
+
 	#endregion
 
 	#region Public Methods
-
-	public void InitiateMinigame(int playerID, Player1Controller controller)
-	{
+    
+	public void InitiateMinigame(int playerID, Player1Controller controller, Item initiatedWithItem)
+    {
 		Debug.Log("InitiateMinigame");
 		GameManager.Instance.MinigameManager.StartMinigame(GetComponent<MinigameDisplayComponent>(), m_MinigameType, playerID, (tickResult) => OnMachineInteractionFinished(tickResult, controller));
 		m_CurrentlyPlayingMinigame = true;
         controller.DisableControls();
+        m_InitiatedWithItem = initiatedWithItem;
 	}
 
 	private void OnMachineInteractionFinished(MinigameTickResult tickResult, Player1Controller controller)
@@ -38,6 +41,11 @@ public class MachineInteraction : MonoBehaviour
 		m_CurrentlyPlayingMinigame = false;
 		m_LastEndedTimestamp = Time.time;
         controller.EnableControls();
+        
+        if (tickResult == MinigameTickResult.EarlySuccess)
+        {
+            m_InitiatedWithItem.OnSuccessFullMachineInteraction();
+        }
 	}
 
 	#endregion

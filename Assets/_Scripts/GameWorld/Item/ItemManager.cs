@@ -35,6 +35,11 @@ public class ItemManager : MonoBehaviour
 		m_ItemTierSettings.Add(ItemTier.Tier4, m_ItemTier4);
 	}
 
+    public ItemSettings GetItemTierSetting(ItemTier tier)
+    {
+        return m_ItemTierSettings[tier];
+    }
+
 	private void Start()
 	{
 		GameManager.Instance.TickManager.OnGameStarted += TickManager_OnGameStarted;
@@ -72,30 +77,29 @@ public class ItemManager : MonoBehaviour
 
 		int amountOfMachinesRequired = Random.Range(settings.MinAmountMachines, settings.MaxAmountMachines + 1);
 
-		List<int> machineIndexList = new List<int>{ 1, 2, 3, 4 };
+		List<MinigameType> machineIndexList = new List<MinigameType>();
 
-		for (int i = 0; i < 4 - amountOfMachinesRequired; ++i)
+		for (int i = 0; i < amountOfMachinesRequired; ++i)
 		{
-			int randIndex = Random.Range(0, machineIndexList.Count);
-
-			int machineIndex = machineIndexList[randIndex];
-
-			machineIndexList.RemoveAt(randIndex);
+			int randIndex = Mathf.RoundToInt(Random.value * ((int) MinigameType.Count - 1));
+			machineIndexList.Add((MinigameType) randIndex);
 		}
 
 		ItemRuntimeData runtimeData;
-		runtimeData.MachineOrderList = machineIndexList;
+		runtimeData.MachineOrderList    = machineIndexList;
+        runtimeData.MachinesNeededTotal = amountOfMachinesRequired;
 
 		// Spawn the actual item
-		Spawn(runtimeData, settings);
+		Spawn(tier, runtimeData, settings);
 	}
 
-	private void Spawn(ItemRuntimeData runtimeData, ItemSettings settings)
+	private void Spawn(ItemTier itemTier, ItemRuntimeData runtimeData, ItemSettings settings)
 	{
 		Transform randomSpawnTransform = m_ItemSpawnPoints[Random.Range(0, m_ItemSpawnPoints.Length)];
 
 		Item spawnedItem = Instantiate(settings.Prefab, randomSpawnTransform.position, Quaternion.identity).GetComponent<Item>();
 
+        spawnedItem.SetTier(itemTier);
 		spawnedItem.SetRuntimeData(runtimeData);
 	}
 

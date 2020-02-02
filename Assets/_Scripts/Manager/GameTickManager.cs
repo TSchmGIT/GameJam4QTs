@@ -84,6 +84,8 @@ public class GameTickManager : MonoBehaviour
 	public void AddPoints(int points)
 	{
 		Points += points;
+
+		Debug.Log("New Score: " + points);
 	}
 
 	public void Init()

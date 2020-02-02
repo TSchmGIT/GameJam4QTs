@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Player1Controller : MonoBehaviour
 {
-    #region Unity References
+	#region Unity References
 
-    public CharacterController m_CharacterController;
-    public float m_MovementSpeed = 5.0f;
-    public MachineInteraction m_MachineInRange = null;
-    public Item m_ItemToPick = null;
-    public Item m_HeldItem = null;
+	public CharacterController m_CharacterController;
+	public float m_MovementSpeed = 5.0f;
+	public MachineInteraction m_MachineInRange = null;
+	public Item m_ItemToPick = null;
+	public Item m_HeldItem = null;
 	public int m_PlayerID = 0;
     public string m_VerticalAxisName = null;
     public string m_HorizontalAxisName = null;
@@ -45,17 +45,18 @@ public class Player1Controller : MonoBehaviour
         {
             transform.forward = delta;
         }
-
+        bool interactedWithMachine = false;
         // Interact with a Machine when in range and holding an item
         if (m_MachineInRange != null && m_MachineInRange.CanStartMinigame)
         {
             if (Input.GetKeyDown(m_InteractKey))
             {
-                if (m_HeldItem != null)
-                {
-                    Debug.Log("Execute Machine Interaction");
-					m_MachineInRange.InitiateMinigame(m_PlayerID, this); 
-                }
+				if (m_HeldItem != null && m_HeldItem.IsEligbleForMachine(m_MachineInRange))
+				{
+					Debug.Log("Execute Machine Interaction");
+					interactedWithMachine = true;
+					m_MachineInRange.InitiateMinigame(m_PlayerID, this, m_HeldItem);
+				}
             }
         }
 
@@ -64,7 +65,7 @@ public class Player1Controller : MonoBehaviour
         {
             if (Input.GetKeyDown(m_InteractKey))
             {
-                if (m_MachineInRange == null)
+                if (!interactedWithMachine)
                 {
                     Debug.Log("Drop Item");
                     Rigidbody ItemRb = m_HeldItem.gameObject.GetComponent<Rigidbody>();
@@ -103,32 +104,30 @@ public class Player1Controller : MonoBehaviour
         if (m_MachineInRange == null && Machine != null)
         {
             m_MachineInRange = Machine;
+
+
+
+
 			Debug.Log("Machine in range");
 		}
 
 		if (Item != null)
-        {
-            m_ItemToPick = Item;
-        }
-    }
-
-    // Check what trigger was exited and respond accordingly
-    private void OnTriggerExit(Collider other)
-    {
-        MachineInteraction Machine = other.GetComponent<MachineInteraction>();
-        Item Item = other.GetComponent<Item>();
-
-        if (Machine == m_MachineInRange)
-        {
-            m_MachineInRange = null;
-			Debug.Log("Machine out of range");
+		{
+			m_ItemToPick = Item;
 		}
+	}
 
-		if (Item != null)
-        {
-            m_ItemToPick = null;
-        }
-        
+	// Check what trigger was exited and respond accordingly
+	private void OnTriggerExit(Collider other)
+	{
+		MachineInteraction Machine = other.GetComponent<MachineInteraction>();
+		Item Item = other.GetComponent<Item>();
+
+		if (Machine == m_MachineInRange)
+		{
+			m_MachineInRange = null;
+			Debug.Log("Machine out of range");
+		}        
     }
 
     // Disable the player controls
@@ -144,5 +143,4 @@ public class Player1Controller : MonoBehaviour
     {
         this.enabled = true;
     }
-    
 }

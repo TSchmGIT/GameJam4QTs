@@ -68,17 +68,6 @@ public class MinigameManager
                 i--;
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            StartMinigame(null, MinigameType.Sequence, 0);
-        }
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            StartMinigame(null, MinigameType.Screwdriver, 0);
-        }
-
     }
 
     ////////////////////////////////////////////////////////////////
