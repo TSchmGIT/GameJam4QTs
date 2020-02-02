@@ -25,16 +25,17 @@ public class MachineInteraction : MonoBehaviour
 	#endregion
 
 	#region Public Methods
-
-	public void InitiateMinigame(int playerID, Item initiatedWithItem)
-	{
+    
+	public void InitiateMinigame(int playerID, Player1Controller controller, Item initiatedWithItem)
+    {
 		Debug.Log("InitiateMinigame");
-		GameManager.Instance.MinigameManager.StartMinigame(GetComponent<MinigameDisplayComponent>(), m_MinigameType, playerID, OnMachineInteractionFinished);
+		GameManager.Instance.MinigameManager.StartMinigame(GetComponent<MinigameDisplayComponent>(), m_MinigameType, playerID, (tickResult) => OnMachineInteractionFinished(tickResult, controller));
 		m_CurrentlyPlayingMinigame = true;
+        controller.DisableControls();
         m_InitiatedWithItem = initiatedWithItem;
 	}
 
-	private void OnMachineInteractionFinished(MinigameTickResult tickResult)
+	private void OnMachineInteractionFinished(MinigameTickResult tickResult, Player1Controller controller)
 	{
 		if (gameObject == null)
 		{
@@ -44,6 +45,7 @@ public class MachineInteraction : MonoBehaviour
 		Debug.Log("I am a machine, my name is " + gameObject.name + " and I finished a minigame with result " + tickResult.ToString());
 		m_CurrentlyPlayingMinigame = false;
 		m_LastEndedTimestamp = Time.time;
+        controller.EnableControls();
         
         if (tickResult == MinigameTickResult.EarlySuccess)
         {
