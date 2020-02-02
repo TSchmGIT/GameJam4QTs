@@ -117,6 +117,8 @@ public class ItemManager : MonoBehaviour
 	private void TickManager_OnGameStarted()
 	{
 		m_LastItemSpawnedTimestamp = Time.time;
+
+		SpawnItem(ItemTier.Tier1);
 	}
 
 	#endregion

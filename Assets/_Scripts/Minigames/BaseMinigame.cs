@@ -8,7 +8,8 @@ using UnityEngine;
 public enum MinigameType
 {
     Sequence    = 0,
-    Screwdriver  = 1
+    Screwdriver  = 1,
+	Morse = 2
 }
 
 ////////////////////////////////////////////////////////////////
@@ -32,7 +33,7 @@ public abstract class BaseMinigame
 
 
     protected Rect              m_GamePlayRect;
-    Camera                      m_MinigameCamera;
+    protected Camera            m_MinigameCamera;
     RenderTexture               m_RenderTexture;
 
     public void Setup(int id, MinigameDisplayComponent displayComponent, Rect rect, int playerID, Action<MinigameTickResult> callback = null)
@@ -43,13 +44,15 @@ public abstract class BaseMinigame
         m_GamePlayRect                          = rect;
         FinishCallback                          = callback;
 
-        GameObject cameraObject                 = new GameObject("Minigame Camera");
+        GameObject cameraObject                 = new GameObject("Minigame " + m_MiniGameID);
         cameraObject.transform.localRotation    = Quaternion.Euler(90, 0, 0);
         m_MinigameCamera                        = cameraObject.AddComponent<Camera>();
         m_MinigameCamera.transform.position     = new Vector3(rect.center.x, 5.0f, rect.center.y);
         m_MinigameCamera.orthographic           = true;
         m_MinigameCamera.aspect                 = rect.size.x / rect.size.y;
         m_MinigameCamera.orthographicSize       = rect.size.x / 2.0f;
+		m_MinigameCamera.clearFlags				= CameraClearFlags.SolidColor;
+		m_MinigameCamera.backgroundColor		= Color.black;
 
         m_RenderTexture                         = new RenderTexture((int) rect.size.x * 64, (int) rect.size.y * 64, 24, RenderTextureFormat.Default);
         m_MinigameCamera.targetTexture          = m_RenderTexture;

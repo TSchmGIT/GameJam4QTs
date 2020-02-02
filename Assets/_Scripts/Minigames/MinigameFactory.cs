@@ -12,7 +12,8 @@ public class MinigameFactory
                 return new SequenceMinigame();
             case MinigameType.Screwdriver:
                 return new ScrewdriverMinigame();
-
+			case MinigameType.Morse:
+				return new MorseMinigame();
             default:
                 Debug.LogError("Not implemented yet");
                 break;

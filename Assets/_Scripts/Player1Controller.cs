@@ -28,7 +28,6 @@ public class Player1Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         //Horizontal and Vertical movement of the player character
         float hor = Input.GetAxis(m_HorizontalAxisName);
         Vector3 horVector = Vector3.right * hor;
@@ -48,7 +47,7 @@ public class Player1Controller : MonoBehaviour
         }
 
         // Interact with a Machine when in range and holding an item
-        if (m_MachineInRange != null && m_MachineInRange.canStartMinigame)
+        if (m_MachineInRange != null && m_MachineInRange.CanStartMinigame)
         {
             if (Input.GetKeyDown(m_InteractKey))
             {

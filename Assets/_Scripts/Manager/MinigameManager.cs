@@ -23,6 +23,11 @@ public class MinigameManager
                 minigame = new ScrewdriverMinigame();
                 minigame.Setup(m_CurrentMinigameID, display, new Rect(200, 100, 10, 10), playerID, callback);
             break;
+			case MinigameType.Morse:
+
+				minigame = new MorseMinigame();
+				minigame.Setup(m_CurrentMinigameID, display, new Rect(300, 100, 10, 10), playerID, callback);
+				break;
         }
 
         BeginMinigame(minigame);

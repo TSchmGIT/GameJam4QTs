@@ -9,14 +9,12 @@ public class MachineInteraction : MonoBehaviour
 	#endregion
 
 	#region Public Properties
-
-	public bool canStartMinigame => false;
+	private bool m_CurrentlyPlayingMinigame = false;
+	public bool CanStartMinigame => !m_CurrentlyPlayingMinigame;
 
 	#endregion
 
-	#region Private Variables
-
-
+	#region Private Variabless
 
 	#endregion
 
@@ -26,12 +24,14 @@ public class MachineInteraction : MonoBehaviour
 	{
 		Debug.Log("InitiateMinigame");
 		GameManager.Instance.MinigameManager.StartMinigame(GetComponent<MinigameDisplayComponent>(), m_MinigameType, playerID, OnMachineInteractionFinished);
+		m_CurrentlyPlayingMinigame = true;
 	}
 
-    void OnMachineInteractionFinished(MinigameTickResult tickResult)
-    {
-        Debug.Log("I am a machine, my name is " + gameObject.name + " and I finished a minigame with result " + tickResult.ToString());
-    }
+	private void OnMachineInteractionFinished(MinigameTickResult tickResult)
+	{
+		Debug.Log("I am a machine, my name is " + gameObject.name + " and I finished a minigame with result " + tickResult.ToString());
+		m_CurrentlyPlayingMinigame = false;
+	}
 
 	#endregion
 }
