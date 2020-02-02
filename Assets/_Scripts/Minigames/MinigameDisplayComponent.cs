@@ -25,10 +25,12 @@ public class MinigameDisplayComponent : MonoBehaviour
     IEnumerator C_AnimatedLightFlash(MinigameTickResult result)
     {
         float time = 0.0f;
-        float totalTime = 0.3f;
+        float totalTime = 0.5f;
 
         Color startColor = Color.white;
         Color targetColor = result == MinigameTickResult.EarlySuccess ? Color.green : Color.red;
+
+        Debug.Log("Animate Success/Fail");
 
         while (time < totalTime)
         {
