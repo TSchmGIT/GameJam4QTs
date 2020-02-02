@@ -36,8 +36,12 @@ public class Player1Controller : MonoBehaviour
         Vector3 verVector = Vector3.forward * ver;
 
         Vector3 delta = horVector + verVector;
+
+		// Gravity
+
         Vector3 deltaNormalized = delta.normalized;
         Vector3 movementVector = deltaNormalized * m_MovementSpeed;
+		movementVector += Physics.gravity;
         m_CharacterController.Move(movementVector * Time.deltaTime);
 
         //Rotate the player chracter in the direction of movement
@@ -69,7 +73,8 @@ public class Player1Controller : MonoBehaviour
                 {
                     Debug.Log("Drop Item");
                     Rigidbody ItemRb = m_HeldItem.gameObject.GetComponent<Rigidbody>();
-                    ItemRb.isKinematic = false;
+					ItemRb.isKinematic = false;
+					ItemRb.detectCollisions = true;
                     m_HeldItem.transform.parent = this.transform.parent;
                     m_HeldItem = null;
                     return;
@@ -87,7 +92,8 @@ public class Player1Controller : MonoBehaviour
                     Debug.Log("Pick Up Item");
                     m_HeldItem = m_ItemToPick;
                     Rigidbody ItemRb = m_HeldItem.gameObject.GetComponent<Rigidbody>();
-                    ItemRb.isKinematic = true;
+					ItemRb.isKinematic = true;
+                    ItemRb.detectCollisions = false;
                     m_HeldItem.transform.parent = this.transform;
                     m_HeldItem.transform.position = m_HoldCube.position;
                 }
