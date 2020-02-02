@@ -35,6 +35,11 @@ public class ItemManager : MonoBehaviour
 		m_ItemTierSettings.Add(ItemTier.Tier4, m_ItemTier4);
 	}
 
+    public ItemSettings GetItemTierSetting(ItemTier tier)
+    {
+        return m_ItemTierSettings[tier];
+    }
+
 	private void Start()
 	{
 		GameManager.Instance.TickManager.OnGameStarted += TickManager_OnGameStarted;
@@ -81,18 +86,20 @@ public class ItemManager : MonoBehaviour
 		}
 
 		ItemRuntimeData runtimeData;
-		runtimeData.MachineOrderList = machineIndexList;
+		runtimeData.MachineOrderList    = machineIndexList;
+        runtimeData.MachinesNeededTotal = amountOfMachinesRequired;
 
 		// Spawn the actual item
-		Spawn(runtimeData, settings);
+		Spawn(tier, runtimeData, settings);
 	}
 
-	private void Spawn(ItemRuntimeData runtimeData, ItemSettings settings)
+	private void Spawn(ItemTier itemTier, ItemRuntimeData runtimeData, ItemSettings settings)
 	{
 		Transform randomSpawnTransform = m_ItemSpawnPoints[Random.Range(0, m_ItemSpawnPoints.Length)];
 
 		Item spawnedItem = Instantiate(settings.Prefab, randomSpawnTransform.position, Quaternion.identity).GetComponent<Item>();
 
+        spawnedItem.SetTier(itemTier);
 		spawnedItem.SetRuntimeData(runtimeData);
 	}
 

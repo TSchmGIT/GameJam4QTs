@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class ItemDespawner : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter(Collider other)
     {
-        
-    }
+        Item item       = other.GetComponent<Item>();
+        if (!item)
+        {
+            return;
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        ItemTier tier   = item.GetTier();
+
+        ItemSettings settings = GameManager.FindObjectOfType<ItemManager>().GetItemTierSetting(tier);
+        GameManager.Instance.TickManager.AddPoints(settings.ScorePerMachineDone * item.GetRuntimeData().MachinesNeededTotal);
     }
 }
