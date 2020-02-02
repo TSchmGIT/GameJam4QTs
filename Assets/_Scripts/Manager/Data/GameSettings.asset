@@ -17,10 +17,10 @@ MonoBehaviour:
   ShowTutorialScreen: 1
   ItemMeshNoStageLeft: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   ItemMeshMinigames:
-  - {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
-  - {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
-  - {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
-  - {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 1886477255729933662, guid: c8d7319b618763b4180b916f70db57b1, type: 3}
+  - {fileID: 1886477255729933662, guid: c8d7319b618763b4180b916f70db57b1, type: 3}
+  - {fileID: 1886477255729933662, guid: c8d7319b618763b4180b916f70db57b1, type: 3}
+  - {fileID: 1886477255729933662, guid: c8d7319b618763b4180b916f70db57b1, type: 3}
   ItemColorNoStageLeft: {r: 0.97313267, g: 1, b: 0.43867922, a: 1}
   ItemColorMinigames:
   - {r: 0.24417053, g: 0.5676972, b: 0.8773585, a: 1}

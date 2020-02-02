@@ -15,7 +15,8 @@ public class GameManager : MonoBehaviour
 	public enum Scenes
 	{
 		MainMenu = 0,
-		Game = 1
+		Game = 1,
+		Credits = 2
 	}
 
 	public static GameManager Instance { get; private set; }
@@ -104,6 +105,11 @@ public class GameManager : MonoBehaviour
 	public void LoadMainMenu()
 	{
 		SceneManager.LoadScene((int)Scenes.MainMenu);
+	}
+
+	public void LoadCredits()
+	{
+		SceneManager.LoadScene((int)Scenes.Credits);
 	}
 
 	public void StartGame()
