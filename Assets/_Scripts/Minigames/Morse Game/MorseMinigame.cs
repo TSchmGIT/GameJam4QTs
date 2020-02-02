@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MorseMinigame : BaseMinigame
@@ -15,27 +16,17 @@ public class MorseMinigame : BaseMinigame
 		Input
 	}
 
-	#region Unity References
-
-	public float m_ShortSequenceMinRange = 0.15f;
-	public float m_ShortSequenceMaxRange = 0.25f;
-	public float m_ShortSequencePlaybackRange = 0.25f;
-
-	public float m_LongSequenceMinRange = 0.4f;
-	public float m_LongSequenceMaxRange = 0.5f;
-	public float m_LongSequencePlaybackRange = 0.5f;
-
-	public int m_MaxAmountLongSequences = 2;
-	public int m_AmountOfSoundsPerSequence = 3;
-
-	#endregion
-
 	#region Private Variables
+
+	private GameSettings settings => GameManager.Instance.settings;
 
 	private List<MorseType> m_MorseTypeSequence = new List<MorseType>();
 	private State m_State = State.Playback;
 	private int m_SequenceIndex = 0;
 	private float m_LastPlaybackSoundTimestamp = 0.0f;
+
+	private float? m_LastUserInputTimestamp = null;
+	private float m_InputFrameStartTimestamp = 0.0f;
 
 	[SerializeField]
 	private MorseSound m_MorseSoundPrefab = null;
@@ -51,12 +42,12 @@ public class MorseMinigame : BaseMinigame
 
 		m_State = State.Playback;
 		m_SequenceIndex = 0;
+
+		PlayPlaybackSound(m_MorseTypeSequence[m_SequenceIndex]);
 	}
 
 	public override MinigameTickResult Tick()
 	{
-		MinigameTickResult result = MinigameTickResult.ContinueTick;
-
 		switch (m_State)
 		{
 			case State.Playback:
@@ -65,23 +56,24 @@ public class MorseMinigame : BaseMinigame
 
 				if (isPlaybackOver)
 				{
-				m_State = State.Input;
+					m_State = State.Input;
+					m_SequenceIndex = 0;
+					m_InputFrameStartTimestamp = Time.time;
 				}
-				break;
+				return MinigameTickResult.ContinueTick;
 			}
 			case State.Input:
 			{
-				result = TickInput();
-				break;
+				return TickInput();
 			}
+			default:
+				return MinigameTickResult.Failed;
 		}
-
-		return result;
 	}
 
 	public override void Finish()
 	{
-		throw new System.NotImplementedException();
+		
 	}
 
 	#endregion
@@ -90,15 +82,16 @@ public class MorseMinigame : BaseMinigame
 
 	private void GenerateMorseCodeSequence()
 	{
-		for (int i = 0; i < m_AmountOfSoundsPerSequence; i++)
+		for (int i = 0; i < GameManager.Instance.settings.AmountSoundsPerSequence; i++)
 		{
-			MorseType randomMorseType = (MorseType)Random.Range(0, 2);
+			MorseType randomMorseType = m_MorseTypeSequence.Count(morseType => morseType == MorseType.Long) < settings.MaxAmountLongSoundsPerSequence ? (MorseType)Random.Range(0, 2) : MorseType.Short;
 			m_MorseTypeSequence.Add(randomMorseType);
 		}
 	}
 
 	private bool TickPlayback()
 	{
+		Debug.Log("TickPlayback()");
 		if (m_SequenceIndex < 0 || m_SequenceIndex >= m_MorseTypeSequence.Count)
 		{
 			return true;
@@ -111,18 +104,12 @@ public class MorseMinigame : BaseMinigame
 
 			if (m_SequenceIndex >= m_MorseTypeSequence.Count)
 			{
-				// Playback has ended
 				return true;
 			}
-			else
-			{
-				// Play next playback sequence
-				MorseType nextMorseType = m_MorseTypeSequence[m_SequenceIndex];
 
-				PlayPlaybackSound(nextMorseType);
-
-				m_LastPlaybackSoundTimestamp = Time.time;
-			}
+			// Play next playback sequence
+			MorseType nextMorseType = m_MorseTypeSequence[m_SequenceIndex];
+			PlayPlaybackSound(nextMorseType);
 		}
 
 		return false;
@@ -131,18 +118,86 @@ public class MorseMinigame : BaseMinigame
 
 	private MinigameTickResult TickInput()
 	{
+		Debug.Log("TickInput()"); 
+		MorseType morseType = m_MorseTypeSequence[m_SequenceIndex]; 
+
+		KeyCode actionKeyCode = GetKeyCode(InputHelper.Keys.Action);
+
+		if (!m_LastUserInputTimestamp.HasValue)
+		{
+			if (m_InputFrameStartTimestamp + settings.InputDelayTolerance <= Time.time)
+			{
+				// FAILED due to inactivity
+				return MinigameTickResult.Failed;
+			}
+
+			if (Input.GetKeyDown(actionKeyCode))
+			{
+				m_LastUserInputTimestamp = Time.time;
+
+				PlayInputSound(m_MorseTypeSequence[m_SequenceIndex]);
+			}
+		}
+		else
+		{
+			if (!Input.GetKey(actionKeyCode))
+			{
+				float keyPressedDuration = Time.time - m_LastUserInputTimestamp.Value;
+
+				float morseTypeDuration = GetPlaybackLengthForMorseType(morseType);
+				float inputTolerance = GetInputToleranceForMorseType(morseType);
+
+				if (keyPressedDuration >= morseTypeDuration - inputTolerance && keyPressedDuration <= morseTypeDuration + inputTolerance)
+				{
+					// Success
+					m_SequenceIndex++;
+
+					if (m_SequenceIndex >= m_MorseTypeSequence.Count)
+					{
+						return MinigameTickResult.EarlySuccess;
+					}
+
+					m_LastUserInputTimestamp = null;
+				}
+				else
+				{
+					// Fail
+					return MinigameTickResult.Failed;
+				}
+
+			}
+		}
+
 		return MinigameTickResult.ContinueTick;
 	}
 
 	private void PlayPlaybackSound(MorseType morse)
 	{
 		GameObject spawnGO = new GameObject("MorseGame");
-		spawnGO.transform.position = new Vector3(100, 0, 0);
+		spawnGO.transform.position = new Vector3(305, 0, 105);
 
+		GameObject gameObject = Object.Instantiate(GameManager.Instance.settings.MorseSoundPrefab);
+		gameObject.transform.position = spawnGO.transform.position;
+		gameObject.transform.rotation = Quaternion.AngleAxis(90, Vector3.right);
+
+		MorseSound morseSound = gameObject.GetComponent<MorseSound>();
+		morseSound.SetMorseDuration(GetPlaybackLengthForMorseType(morse), settings.MorseColorPlayback);
+
+		m_LastPlaybackSoundTimestamp = Time.time;
 	}
 
-	private void PlayInputSound()
+	private void PlayInputSound(MorseType morseType)
 	{
+		GameObject spawnGO = new GameObject("MorseGame");
+		spawnGO.transform.position = new Vector3(305, 0, 105);
+
+		var gameObject = Object.Instantiate(GameManager.Instance.settings.MorseSoundPrefab);
+		gameObject.transform.position = spawnGO.transform.position;
+		gameObject.transform.rotation = Quaternion.AngleAxis(90, Vector3.right);
+
+		MorseSound morseSound = gameObject.GetComponent<MorseSound>();
+		morseSound.SetMorseDuration(GetPlaybackLengthForMorseType(morseType), settings.MorseColorInput);
+
 
 	}
 
@@ -151,12 +206,36 @@ public class MorseMinigame : BaseMinigame
 		switch (type)
 		{
 			case MorseType.Short:
-				return m_ShortSequencePlaybackRange;
+				return settings.ShortPlaybackTime;
 			case MorseType.Long:
-				return m_LongSequencePlaybackRange;
+				return settings.LongPlaybackTime;
 		}
 
 		return 0.0f;
+	}
+
+	private float GetInputToleranceForMorseType(MorseType type)
+	{
+		switch (type)
+		{
+			default:
+			case MorseType.Short:
+				return settings.ShortInputTolerance;
+			case MorseType.Long:
+				return settings.LongInputTolerance;
+		}
+	}
+
+	private Color GetColorForState(State state)
+	{
+		switch (state)
+		{
+			default:
+			case State.Playback:
+				return settings.MorseColorPlayback;
+			case State.Input:
+				return settings.MorseColorInput;
+		}
 	}
 
 	#endregion

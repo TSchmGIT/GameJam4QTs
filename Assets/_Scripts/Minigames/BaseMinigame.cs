@@ -51,6 +51,8 @@ public abstract class BaseMinigame
         m_MinigameCamera.orthographic           = true;
         m_MinigameCamera.aspect                 = rect.size.x / rect.size.y;
         m_MinigameCamera.orthographicSize       = rect.size.x / 2.0f;
+		m_MinigameCamera.clearFlags				= CameraClearFlags.SolidColor;
+		m_MinigameCamera.backgroundColor		= Color.black;
 
         m_RenderTexture                         = new RenderTexture((int) rect.size.x * 64, (int) rect.size.y * 64, 24, RenderTextureFormat.Default);
         m_MinigameCamera.targetTexture          = m_RenderTexture;

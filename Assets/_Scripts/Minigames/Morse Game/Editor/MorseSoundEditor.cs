@@ -14,7 +14,7 @@ public class MorseSoundEditor : Editor
 
 		if (GUILayout.Button("Test Effect"))
 		{
-			morseSound.SetMorseDuration(1.0f);
+			morseSound.SetMorseDuration(1.0f, Color.green);
 		}
 	}
 }

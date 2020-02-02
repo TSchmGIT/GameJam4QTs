@@ -108,4 +108,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MeshRenderer: {fileID: 4925278247823318203}
-  m_ScaleSpeed: 3
+  m_ScaleSpeed: 5

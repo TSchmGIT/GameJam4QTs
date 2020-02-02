@@ -10,13 +10,11 @@ public class MachineInteraction : MonoBehaviour
 
 	#region Public Properties
 
-	public bool canStartMinigame => false;
+	public bool canStartMinigame => true;
 
 	#endregion
 
-	#region Private Variables
-
-
+	#region Private Variabless
 
 	#endregion
 
