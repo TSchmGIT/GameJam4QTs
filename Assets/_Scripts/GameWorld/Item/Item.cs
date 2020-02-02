@@ -3,17 +3,19 @@ using UnityEngine;
 
 public struct ItemRuntimeData
 {
-	public List<MinigameType> MachineOrderList;
+	public List<MinigameType>   MachineOrderList;
+    public int                  MachinesNeededTotal;
 }
 
 [RequireComponent(typeof(Rigidbody))]
 public class Item : MonoBehaviour
 {
 	#region Private Members
-	private List<ConveyorBelt> m_ConveyorBeltList = new List<ConveyorBelt>();
-	private Rigidbody m_Rigidbody = null;
-    private MeshRenderer m_MeshRenderer = null;
+	private List<ConveyorBelt> m_ConveyorBeltList   = new List<ConveyorBelt>();
+	private Rigidbody m_Rigidbody                   = null;
+    private MeshRenderer m_MeshRenderer             = null;
     private MeshFilter m_MeshFilter;
+    private ItemTier m_ItemTier;
 
 	private ItemRuntimeData m_RuntimeData;
 	
@@ -78,6 +80,16 @@ public class Item : MonoBehaviour
         UpdateVisualization();
 	}
 
+    public ItemRuntimeData GetRuntimeData()
+    {
+        return m_RuntimeData;
+    }
+
+    public void SetTier(ItemTier itemTier)
+    {
+        m_ItemTier = itemTier;
+    }
+
     public bool IsEligbleForMachine(MachineInteraction machine)
     {
         if (m_RuntimeData.MachineOrderList.Count == 0)
@@ -109,5 +121,10 @@ public class Item : MonoBehaviour
         m_MeshFilter.mesh                   = GameManager.Instance.settings.ItemMeshMinigames[(int) m_RuntimeData.MachineOrderList[0]];
         m_MeshRenderer.material.color       = GameManager.Instance.settings.ItemColorMinigames[(int) m_RuntimeData.MachineOrderList[0]];
     }
+
+    public ItemTier GetTier()
+    {
+        return m_ItemTier;
+    }   
 	#endregion
 }

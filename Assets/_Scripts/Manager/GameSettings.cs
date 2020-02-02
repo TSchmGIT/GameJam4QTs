@@ -15,7 +15,7 @@ public class GameSettings : ScriptableObject
     public List<Mesh>   ItemMeshMinigames;
     public Color        ItemColorNoStageLeft;
     public List<Color>  ItemColorMinigames;
-
+    public int          ItemScorePerMinigameDone;
 
     [Header("Minigame: Sequence")]
     public Texture2D[] RuneTextures;
