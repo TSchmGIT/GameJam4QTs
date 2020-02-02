@@ -54,7 +54,7 @@ public class Player1Controller : MonoBehaviour
                 if (m_HeldItem != null)
                 {
                     Debug.Log("Execute Machine Interaction");
-					m_MachineInRange.InitiateMinigame(m_PlayerID);
+					m_MachineInRange.InitiateMinigame(m_PlayerID, this); 
                 }
             }
         }
@@ -130,4 +130,19 @@ public class Player1Controller : MonoBehaviour
         }
         
     }
+
+    // Disable the player controls
+
+    public void DisableControls()
+    {
+        this.enabled = false;
+    }
+
+    // Enable the player controls
+
+    public void EnableControls()
+    {
+        this.enabled = true;
+    }
+    
 }
