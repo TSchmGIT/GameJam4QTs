@@ -16,5 +16,7 @@ public class ItemDespawner : MonoBehaviour
 
         ItemSettings settings = GameManager.FindObjectOfType<ItemManager>().GetItemTierSetting(tier);
         GameManager.Instance.TickManager.AddPoints(settings.ScorePerMachineDone * item.GetRuntimeData().MachinesNeededTotal);
+
+        GameObject.Destroy(item);
     }
 }
